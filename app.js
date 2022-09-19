@@ -9,6 +9,7 @@ require('dotenv').config()
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const newsRouter = require('./routes/news');
 const loginRouter = require('./routes/login');
 const categoriesRouter = require('./routes/categories');
 
@@ -28,6 +29,7 @@ app.use(authMiddleware);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/news', newsRouter);
 app.use('/login', loginRouter);
 app.use('/categories', categoriesRouter);
 
