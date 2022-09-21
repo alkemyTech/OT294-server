@@ -14,7 +14,6 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './.env.example' });
 const { User } = require('../models/user');
 
-
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
@@ -41,6 +40,8 @@ router.post('/auth/register', createUserValidators, async (req, res, next) => {
   res.status(201).json({
     status: 'success',
     newUser,
+  });
+});
 /* POST users authentication. */
 router.post('/auth/login', async (req, res, next) => {
   const { email, password } = req.body;
