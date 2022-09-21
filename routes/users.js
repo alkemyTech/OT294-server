@@ -6,9 +6,8 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
 dotenv.config({ path: './.env.example' });
-
-//Models
 const { User } = require('../models/user');
+
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
