@@ -2,18 +2,17 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('Users', [{
-      firstName: 'Usuario',
-      lastName: 'Demo',
-      email: 'test@test.com',
-      // Important: Password not encrypted yet! 
-      password: '1234',
-      status: 'active',
-      roleId: 1,
+     await queryInterface.bulkInsert('Members', [{
+      name: 'Usuario',
+      facebookUrl: 'https://facebook.com',
+      instagramUrl: 'https://instagram.com',
+      linkedinUrl: "https://linkedin.com",
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
+      description: "description test",
+      deletedAt: new Date,
       createdAt: new Date,
       updatedAt: new Date
-    }], {});
+    }], {})
   },
 
   down: async (queryInterface, Sequelize) => {
