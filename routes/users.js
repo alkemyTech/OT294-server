@@ -15,9 +15,9 @@ router.get('/', function (req, res, next) {
 });
 
 /* POST users authentication. */
-router.post('/auth/login', async (req, res, next) => {
+router.post('/auth/login',async (req, res, next) => {
   const { email, password } = req.body;
-
+  
   // Validate credentials (email)
   const user = await User.findOne({
     where: { email, status: 'active' },
