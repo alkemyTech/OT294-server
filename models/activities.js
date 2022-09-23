@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
+
   Activities.init(
     {
       name: DataTypes.STRING,
@@ -25,3 +26,4 @@ module.exports = (sequelize, DataTypes) => {
   );
   return Activities;
 };
+
