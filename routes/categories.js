@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
+//Models
+const { Category } = require('../models/category')
 const { createCategoryValidators } = require('../middlewares/validators.middleware')
 
 /* GET categories listing. */
