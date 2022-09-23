@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models/index')
 
+//Model
+const { News } = require('../models/news')
+
+//Middlewares
 const { newsExists } = require('../middlewares/news.middleware')
 
 
