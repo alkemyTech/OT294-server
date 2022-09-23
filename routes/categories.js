@@ -2,6 +2,8 @@ var express = require('express');
 const { categoryExists } = require('../middlewares/categories.middleware');
 const { Category } = require('../models/category');
 
+const { deleteCategory } = require('../controllers/categories.controller');
+
 var router = express.Router();
 
 /* GET categories listing. */
@@ -22,5 +24,7 @@ router.get('/categories/:id', categoryExists, async (req, res, next) => {
     categoryById,
   });
 });
+
+router.delete('/:id', categoryExists, deleteCategory);
 
 module.exports = router;
