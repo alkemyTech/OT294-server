@@ -11,7 +11,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const newsRouter = require('./routes/news');
 const loginRouter = require('./routes/login');
-const categoriesRouter = require('./routes/categories');
+const { categoriesRouter } = require('./routes/categories');
 
 const app = express();
 app.use(cors())
