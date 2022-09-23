@@ -1,14 +1,19 @@
 
 const authAdmin = async (req, res, next) => {
-	const { user } = req;	
+	try {
+		const { user } = req;	
 	
 		if (user.roleId !== 1) {
 			return next('Error, You are not an user admin');
 		}
 	
-		next();
+		
+	} catch (error) {
+		console.log(error);
+	}
+	next();	
 	};
 
 
 
-module.exports = authAdmin;
+module.exports = {authAdmin};

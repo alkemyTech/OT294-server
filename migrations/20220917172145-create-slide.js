@@ -20,9 +20,11 @@ module.exports = {
       organizationId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Organization',
-          key: 'id',
-        },
+					model: {
+						tableName: 'Organization',
+					},
+					key: 'id',
+				},
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
