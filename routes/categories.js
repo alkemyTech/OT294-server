@@ -1,5 +1,7 @@
 var express = require('express');
 const { categoryExists } = require('../middlewares/categories.middleware');
+const { Category } = require('../models/category');
+
 var router = express.Router();
 
 /* GET categories listing. */
