@@ -1,9 +1,17 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
 
-/* GET categories listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+// Controllers
+const {
+	deleteCategory,	
+} = require('../controllers/categories.controller');
 
-module.exports = router;
+// Middlewares
+const {
+	categoryExists
+} = require('../middlewares/categories.middleware.js');
+
+const categoriesRouter = express.Router();
+
+categoriesRouter.delete('/:id', categoryExists, deleteCategory);
+
+module.exports = { categoriesRouter };
