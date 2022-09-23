@@ -8,6 +8,9 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './.env.example' });
 const { User } = require('../models/user');
 
+//Middleware
+const { authAdmin } = require('../middlewares/authAdmin')
+
 
 /* GET users listing. */
 router.get('/users', authAdmin, async (req, res, next) => {
