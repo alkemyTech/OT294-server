@@ -10,8 +10,13 @@ const { User } = require('../models/user');
 
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
+router.get('/users', authAdmin, async (req, res, next) => {
+  const users = await User.findAll()
+
+  res.status(201).json({
+    status: 'success',
+    users
+  });
 });
 
 /* POST users authentication. */
