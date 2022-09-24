@@ -8,6 +8,15 @@ class AppError extends Error {
 
     Error.captureStackTrace(this, this.constructor);
   }
+	constructor(message, statusCode) {
+		super(message);
+
+		this.message = message;
+		this.statusCode = statusCode;
+		this.status = `${statusCode}`.startsWith('5') ? 'fail' : 'error';
+
+		Error.captureStackTrace(this, this.constructor);
+	}
 }
 
 module.exports = { AppError };

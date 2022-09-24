@@ -11,7 +11,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const newsRouter = require('./routes/news');
 const loginRouter = require('./routes/login');
-const categoriesRouter = require('./routes/categories');
+const { categoriesRouter } = require('./routes/categories');
 
 const app = express();
 app.use(cors())
@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(authMiddleware);
+//app.use(authMiddleware);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

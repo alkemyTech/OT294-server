@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models/index')
 
+const { deleteNew } = require('../controllers/news.controller');
+const { newExists } = require('../middlewares/news.middleware');
 
 /* Get news deleted */
 
@@ -24,7 +26,7 @@ router.get('/deleted', async function (req, res, next) {
 
     });
 
-  } catch (error) {
+  } catch (error) {    
     console.log(error);
   }
 });
@@ -129,29 +131,7 @@ router.put('/:id', async function (req, res, next) {
 
 /* DELETE new */
 
-router.delete('/:id', async function (req, res, next) {
-
-  try {
-
-    const { id } = req.params
-    
-    const newToDelete = await db.News.findOne({ where: { id } })
-    
-    const fecha = new Date()
-
-    newToDelete.update({ deletedAt: fecha })
-
-    res.status(200).json({
-
-      status: 'success',
-
-    });
-    
-  } catch (error) {
-    console.log(error);
-  }
-
-});
+router.delete('/:id', newExists, deleteNew);
 
 
 module.exports = router;
