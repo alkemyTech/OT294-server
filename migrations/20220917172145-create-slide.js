@@ -17,7 +17,7 @@ module.exports = {
       order: {
         type: Sequelize.STRING
       },
-      organizationId: {
+      /* organizationId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Organization',
@@ -25,7 +25,7 @@ module.exports = {
         },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
-      },
+      }, */
       deletedAt: {
         type: Sequelize.DATE
       },
