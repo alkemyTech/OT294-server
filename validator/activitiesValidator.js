@@ -1,6 +1,6 @@
 const { check } = require("express-validator");
 const AppError = require('../utils/appError.util')
-
+const db = require("../models/index");
 
 
 const id_activity = check("id")
