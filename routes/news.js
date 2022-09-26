@@ -8,6 +8,8 @@ const { News } = require('../models/news')
 //Middlewares
 const { newsExists } = require('../middlewares/news.middleware')
 
+const { deleteNew } = require('../controllers/news.controller');
+const { newExists } = require('../middlewares/news.middleware');
 
 /* Get news deleted */
 
@@ -30,7 +32,7 @@ router.get('/deleted', async function (req, res, next) {
 
     });
 
-  } catch (error) {
+  } catch (error) {    
     console.log(error);
   }
 });
@@ -123,29 +125,7 @@ router.put('/news/:id', newsExists, async (req, res, next) => {
 
 /* DELETE new */
 
-router.delete('/:id', async function (req, res, next) {
-
-  try {
-
-    const { id } = req.params
-    
-    const newToDelete = await db.News.findOne({ where: { id } })
-    
-    const fecha = new Date()
-
-    newToDelete.update({ deletedAt: fecha })
-
-    res.status(200).json({
-
-      status: 'success',
-
-    });
-    
-  } catch (error) {
-    console.log(error);
-  }
-
-});
+router.delete('/:id', newExists, deleteNew);
 
 
 module.exports = router;
