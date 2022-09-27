@@ -7,7 +7,8 @@ var router = express.Router();
 //Models
 const { Category } = require('../models/category')
 //Middlewares
-const { createCategoryValidators } = require('../middlewares/validators.middleware')
+const { createCategoryValidators } = require('../middlewares/validators.middleware');
+const { deleteCategory } = require('../controllers/categories.controller');
 
 /* GET categories listing. */
 router.get('/', function (req, res, next) {
@@ -37,5 +38,7 @@ router.get('/categories/:id', categoryExists, async (req, res, next) => {
     categoryById,
   });
 });
+
+router.delete('/categories/:id', categoryExists, deleteCategory)
 
 module.exports = router;
