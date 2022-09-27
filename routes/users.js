@@ -15,9 +15,18 @@ dotenv.config({ path: './.env.example' });
 const { User } = require('../models/user');
 const { userExists } = require('../middlewares/users.middleware');
 
+//Middleware
+const { authAdmin } = require('../middlewares/authAdmin')
+
+
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
+router.get('/users', authAdmin, async (req, res, next) => {
+  const users = await User.findAll()
+
+  res.status(201).json({
+    status: 'success',
+    users
+  });
 });
 
 /* POST user registration. */
