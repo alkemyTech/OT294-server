@@ -2,7 +2,10 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models/index')
 
-//middlewares
+//Model
+const { News } = require('../models/news')
+
+//Middlewares
 const { newsExists } = require('../middlewares/news.middleware')
 
 const { deleteNew } = require('../controllers/news.controller');
