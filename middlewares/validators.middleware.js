@@ -36,6 +36,29 @@ const createUserValidators = [
   checkResult,
 ];
 
+const organizationDataValidators = [
+  body('name')
+    .notEmpty()
+    .withMessage('Name cannot be empty')
+    .isString()
+    .withMessage('Name must be a string'),
+  body('image')
+    .notEmpty()
+    .withMessage('Image cannot be empty')
+    .isString()
+    .withMessage('Image must be a string'),
+  body('email')
+    .notEmpty()
+    .withMessage('Email que not be empty')
+    .isEmail()
+    .withMessage('Must provide a valid email'),
+  body('welcomeText')
+    .isEmpty()
+    .withMessage('Welcome Text can not be empty'),         
+  checkResult,
+];
+
 module.exports = {
   createUserValidators,
+  organizationDataValidators
 };

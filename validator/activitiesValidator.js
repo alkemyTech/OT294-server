@@ -11,7 +11,6 @@ const id_activity = check("id")
   .custom(
     async (id = '') => {
         const activity = await db.Activities.findOne({ where: { id } });
-        console.log(activity)
         if (!activity) {
             throw new AppError('Activity not found', 404);
         }
