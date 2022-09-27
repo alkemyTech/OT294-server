@@ -13,6 +13,7 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './.env.example' });
 const { User } = require('../models/user');
+const { userExists } = require('../middlewares/users.middleware');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -72,6 +73,16 @@ router.post('/auth/login', async (req, res, next) => {
     status: 'success',
     token,
   });
+});
+
+/* PATCH  users updated */
+router.patch('/users/:id', userExists, async (req, res, next) => {
+  const { user } = req;
+  const { firstName, lastName, email, image, password } = req.body;
+
+  await user.update({ firstName, lastName, email, image, password });
+
+  res.status(201).json({ status: 'success', user });
 });
 
 module.exports = router;
