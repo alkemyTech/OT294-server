@@ -2,6 +2,12 @@ var express = require('express');
 var router = express.Router();
 var db = require('../models/index')
 
+//Model
+const { News } = require('../models/news')
+
+//Middlewares
+const { newsExists } = require('../middlewares/news.middleware')
+
 const { deleteNew } = require('../controllers/news.controller');
 const { newExists } = require('../middlewares/news.middleware');
 
@@ -104,28 +110,16 @@ router.post('/', async function (req, res, next) {
 
 
 /* PUT update new */
-
-router.put('/:id', async function (req, res, next) {
-
-  try {
-
-    const { id } = req.params
+router.put('/news/:id', newsExists, async (req, res, next) => {
+    const { news } = req
     const { name, content, image, categoryId, deletedAt } = req.body
 
-    const newFounded = await db.News.findOne({ where: { id } })
+    await news.update({ name, content, image, categoryId, deletedAt })
 
-    newFounded.update({ name, content, image, categoryId, deletedAt })
-
-    res.status(200).json({
-
+    res.status(201).json({
       status: 'success',
-      newFounded,
-
+      news,
     });
-
-  } catch (error) {
-    console.log(error);
-  }
 });
 
 
