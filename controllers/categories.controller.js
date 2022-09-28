@@ -1,3 +1,10 @@
+
+const { Category } = require('../models');
+
+const updateCategory = async (id, categoryInfo) => {
+    return await Category.update(categoryInfo, { where: { id } })
+}
+
 const deleteCategory = async (req, res, next) => {
 	try {
         const { category } = req;
