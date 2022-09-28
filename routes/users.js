@@ -37,14 +37,14 @@ router.post('/auth/register', createUserValidators, async (req, res, next) => {
   // Hash password
   const salt = await bcrypt.genSalt(12);
   const hashPassword = await bcrypt.hash(password, salt);
-
+  const SECRET_KEY = process.env.JWT_SECRET;
   const newUser = await User.create({
     firstName,
     lastName,
     email,
     password: hashPassword,
   });
-
+  const token = jwt.sign(newUser.id, SECRET_KEY);
   // Remove password from response
   newUser.password = undefined;
 
@@ -53,7 +53,11 @@ router.post('/auth/register', createUserValidators, async (req, res, next) => {
 
   res.status(201).json({
     status: 'success',
-    newUser,
+    message: "Se ha registardo el usuario exitosamente",
+    data: {
+      newUser,
+      token
+    }
   });
 });
 /* POST users authentication. */
