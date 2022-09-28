@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs');
+const { Email } = require('../utils/email.util');
 
 // Middlewares
 const {
@@ -46,6 +47,9 @@ router.post('/auth/register', createUserValidators, async (req, res, next) => {
 
   // Remove password from response
   newUser.password = undefined;
+
+  // Send welcome email
+  await new Email(email).sendWelcome(firstName);
 
   res.status(201).json({
     status: 'success',
