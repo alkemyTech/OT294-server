@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcryptjs');
+const { Email } = require('../utils/email.util');
 
 // Middlewares
 const {
@@ -13,10 +14,20 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './.env.example' });
 const { User } = require('../models/user');
+const { userExists } = require('../middlewares/users.middleware');
+
+//Middleware
+const { authAdmin } = require('../middlewares/authAdmin')
+
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
+router.get('/users', authAdmin, async (req, res, next) => {
+  const users = await User.findAll()
+
+  res.status(201).json({
+    status: 'success',
+    users
+  });
 });
 
 /* POST user registration. */
@@ -26,20 +37,27 @@ router.post('/auth/register', createUserValidators, async (req, res, next) => {
   // Hash password
   const salt = await bcrypt.genSalt(12);
   const hashPassword = await bcrypt.hash(password, salt);
-
+  const SECRET_KEY = process.env.JWT_SECRET;
   const newUser = await User.create({
     firstName,
     lastName,
     email,
     password: hashPassword,
   });
-
+  const token = jwt.sign(newUser.id, SECRET_KEY);
   // Remove password from response
   newUser.password = undefined;
 
+  // Send welcome email
+  await new Email(email).sendWelcome(firstName);
+
   res.status(201).json({
     status: 'success',
-    newUser,
+    message: "Se ha registardo el usuario exitosamente",
+    data: {
+      newUser,
+      token
+    }
   });
 });
 /* POST users authentication. */
@@ -72,6 +90,16 @@ router.post('/auth/login', async (req, res, next) => {
     status: 'success',
     token,
   });
+});
+
+/* PATCH  users updated */
+router.patch('/users/:id', userExists, async (req, res, next) => {
+  const { user } = req;
+  const { firstName, lastName, email, image, password } = req.body;
+
+  await user.update({ firstName, lastName, email, image, password });
+
+  res.status(201).json({ status: 'success', user });
 });
 
 module.exports = router;
