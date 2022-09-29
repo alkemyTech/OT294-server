@@ -1,26 +1,50 @@
+const { catchAsync } = require("../utils/catchAsync.util");
+const { Category } = require("../models");
 
-const { Category } = require('../models');
+const updateCategory = catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const { name, description, image } = req.body;
+    const { category } = req;
+    const response = await category.update({ name, description, image }, { where: { id } });
+    res.json({
+        status: true,
+        message: "La categoría ha sido actulizada",
+        data: response
+    });
+});
 
-const updateCategory = async (id, categoryInfo) => {
-    return await Category.update(categoryInfo, { where: { id } })
-}
+const deleteCategory = catchAsync(async (req, res) => {
+    const { category } = req;
+    const fecha = new Date();
+    await category.update({ deletedAt: fecha });
+    res.status(204).json({
+        status: true,
+        message: "La categoría ha sido borrada"
+    });
+});
 
-const deleteCategory = async (req, res, next) => {
-	try {
-        const { category } = req;
+const createCategory = catchAsync(async (req, res) => {
+    const { name, description, image } = req.body;
+    const category = await Category.create({ name, description, image });
+    res.status(204).json({
+        status: true,
+        message: "La categoría ha sido creada",
+        data: category
+    });
+});
 
-        const fecha = new Date()
-    
-        await category.update({ deletedAt: fecha });
-    
-        res.status(204).json({ status: 'success' });  
-          
-    } catch (error) {
-        res.status(401).json({ error });
-    }
-    
+const getCategoryById = catchAsync(async (req, res) => {
+    const { category } = req;
+    res.status(201).json({
+        status: true,
+        message: "La categoría se ha obtenido",
+        data: category
+    });
+});
+
+module.exports = {
+    deleteCategory,
+    updateCategory,
+    createCategory,
+    getCategoryById
 };
-
-module.exports={
-    deleteCategory
-}

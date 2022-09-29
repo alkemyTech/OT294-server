@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Slides', {
+    await queryInterface.createTable("Slides", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -20,11 +20,11 @@ module.exports = {
       organizationId: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Organization',
-          key: 'id',
+          model: "Organization",
+          key: "id",
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL"
       },
       deletedAt: {
         type: Sequelize.DATE
@@ -40,6 +40,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Slides');
+    await queryInterface.dropTable("Slides");
   }
 };
