@@ -2,11 +2,18 @@ const express = require("express");
 const slidesRouter = express.Router();
 
 // Controllers
-const { getAllSlides } = require("../controllers/slides.controller");
+const { createSlide } = require("../controllers/slides.controller");
 
 // Middlewares
 const { authAdmin } = require("../middlewares/authAdmin.middleware");
+const { createSlideValidators } = require("../validators/slide.validator");
 
-slidesRouter.get("/", authAdmin,getAllSlides);
+slidesRouter.get(
+  "/",
+  authAdmin,
+  upload.single("imageUrl"),
+  createSlideValidators,
+  createSlide
+);
 
 module.exports = slidesRouter;
