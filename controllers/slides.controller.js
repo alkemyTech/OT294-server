@@ -1,21 +1,16 @@
-// Models
-const { Slide } = require("../models");
-
 // Utils
 const { catchAsync } = require("../utils/catchAsync.util");
 
-const getAllSlides = catchAsync(async (req, res) => {
-    const slides = await Slide.findAll({
-        attributes: ["imageUrl", "order"],
-    });
+const getSlideById = catchAsync(async (req, res) => {
+  const { slide } = req;
 
-    res.status(201).json({
-        status: true,
-        message: "Listado de slides",
-        data: slides,
-    });
+  res.status(201).json({
+    status: true,
+    message: "Detalle de slide",
+    data: slide,
+  });
 });
 
 module.exports = {
-    getAllSlides,
+  getSlideById,
 };
