@@ -5,7 +5,7 @@ const upload = require("./uploadImage");
 // Utils
 const { catchAsync } = require("../utils/catchAsync.util");
 
-const updatedSlide = catchAsync(async (req, res) => {
+const updateSlide = catchAsync(async (req, res) => {
   const { slide, file } = req;
   const { text, order, organizationId } = req.body;
 
@@ -27,5 +27,5 @@ const updatedSlide = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-  updatedSlide,
+  updateSlide,
 };
