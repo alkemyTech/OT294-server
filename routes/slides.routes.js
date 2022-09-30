@@ -2,7 +2,7 @@ const express = require("express");
 const slidesRouter = express.Router();
 
 // Controllers
-const { updatedSlide } = require("../controllers/slides.controller");
+const { updateSlide } = require("../controllers/slides.controller");
 
 // Utils
 const upload = require("../controllers/uploadImage");
@@ -16,7 +16,7 @@ slidesRouter.put(
   upload.single("imageUrl"),
   authAdmin,
   slideExists,
-  updatedSlide
+  updateSlide
 );
 
 module.exports = slidesRouter;
