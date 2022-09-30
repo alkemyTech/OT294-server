@@ -1,15 +1,27 @@
+// Models
+const { uploadFile } = require("../services/imageService");
+const upload = require("./uploadImage");
+
 // Utils
 const { catchAsync } = require("../utils/catchAsync.util");
 
 const updatedSlide = catchAsync(async (req, res) => {
-  const { slide } = req;
-  const { imageUrl, text, order, organizationId } = req.body;
+  const { slide, file } = req;
+  const { text, order, organizationId } = req.body;
 
-  await slide.put(imageUrl, text, order, organizationId);
+  const imgRef = ref(upload, `slides/${Date.now()}_${file.originalname}`);
+  const imgRes = await uploadFile(imgRef, file.buffer);
+
+  await slide.update({
+    imageUrl: imgRes.metadata.fullPath,
+    text,
+    order,
+    organizationId,
+  });
 
   res.status(201).json({
     status: true,
-    message: "Detalle de slide",
+    message: "Slide actualizado",
     data: slide,
   });
 });
