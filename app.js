@@ -12,12 +12,9 @@ const categoriesRouter = require("./routes/categories.routes");
 const organizationRouter = require("./routes/organization.routes");
 const authRouter = require("./routes/auth.routes");
 const activitiesRouter = require("./routes/activities.routes");
-<<<<<<< HEAD
 const testimonialsRouter = require("./routes/testimonials.routes")
-=======
 const slidesRouter = require("./routes/slides.routes");
 const membersRouter = require("./routes/members.routes");
->>>>>>> 24d9cf96174477aa8241f70299a74f4dfa14c64c
 const app = express();
 app.use(cors());
 
@@ -38,12 +35,9 @@ app.use("/categories", categoriesRouter);
 app.use("/auth", authRouter);
 app.use("/activities", activitiesRouter);
 app.use("/organization", organizationRouter);
-<<<<<<< HEAD
 app.use("/testimonials", testimonialsRouter);
-=======
 app.use("/slides", slidesRouter);
 app.use("/members", membersRouter);
->>>>>>> 24d9cf96174477aa8241f70299a74f4dfa14c64c
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
