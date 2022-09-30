@@ -8,6 +8,6 @@ const { deleteSlide } = require("../controllers/slides.controller");
 const { authAdmin } = require("../middlewares/authAdmin.middleware");
 const { slideExists } = require("../middlewares/slide.middleware");
 
-slidesRouter.get("/:id", authAdmin, slideExists, deleteSlide);
+slidesRouter.delete("/:id", authAdmin, slideExists, deleteSlide);
 
 module.exports = slidesRouter;
