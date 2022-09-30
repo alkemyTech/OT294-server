@@ -5,8 +5,10 @@ const testimonialsRouter = express.Router();
 const { authAdmin } = require('../middlewares/authAdmin.middleware')
 
 // Controllers
-const { createTestimonial } = require("../controllers/testimonials.controller");
+const { createTestimonial, deleteTestimonial } = "../controllers/testimonials.controller";
 
 testimonialsRouter.post("/", authAdmin, createTestimonial);
+
+testimonialsRouter.delete("/:id", testimonialsExists, authAdmin, deleteTestimonial)
 
 module.exports = testimonialsRouter
