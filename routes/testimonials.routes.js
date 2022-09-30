@@ -6,7 +6,8 @@ const { createTestimonial } = require("../controllers/testimonials.controller");
 
 // Middleware
 const { authAdmin } = require("../middlewares/authAdmin.middleware");
+const { createTestimonialValidators } = require("../validators/testimonials.validator");
 
-testimonialsRouter.post("/", authAdmin, createTestimonial);
+testimonialsRouter.post("/", createTestimonialValidators, authAdmin, createTestimonial);
 
 module.exports = testimonialsRouter;
