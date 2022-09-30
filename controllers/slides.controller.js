@@ -9,6 +9,7 @@ const getSlideById = catchAsync(async (req, res) => {
     message: "Detalle del slide",
     data: slide,
   });
+  
 });
 
 module.exports = {
