@@ -6,7 +6,7 @@ const deleteSlide = catchAsync(async (req, res) => {
 
   await slide.destroy();
 
-  res.status(201).json({
+  res.status(200).json({
     status: true,
     message: "Slide eliminado",
     data: slide,
