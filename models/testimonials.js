@@ -16,11 +16,12 @@ module.exports = (sequelize, DataTypes) => {
     Testimonials.init({
         name: DataTypes.STRING,
         image: DataTypes.STRING,
-        roleId: DataTypes.INTEGER,
+        content: DataTypes.STRING,
         deleteAt: DataTypes.DATE
     }, {
         sequelize,
         modelName: "Testimonials",
+        paranoid: true
     });
     return Testimonials;
 };
