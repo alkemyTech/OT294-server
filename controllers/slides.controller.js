@@ -9,7 +9,7 @@ const getAllSlides = catchAsync(async (req, res) => {
         attributes: ["imageUrl", "order"],
     });
 
-    res.status(201).json({
+    res.status(200).json({
         status: true,
         message: "Listado de slides",
         data: slides,
