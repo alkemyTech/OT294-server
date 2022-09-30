@@ -4,9 +4,9 @@ const { checkResult } = require("../utils/checkResult.util");
 const createMemberValidators = [
     body("name")
         .notEmpty()
-        .withMessage("Nombre de la categoria no puede ser un campo vacio")
+        .withMessage("El Nombre de miembro no puede estar vacio")
         .isString()
-        .withMessage("El nombre debe ser de tipo string"),
+        .withMessage("El campo Nombre debe ser texto"),
     checkResult,
 ];
 
