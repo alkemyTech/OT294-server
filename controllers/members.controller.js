@@ -5,12 +5,12 @@ const { members } = require("../models");
 const { catchAsync } = require("../utils/catchAsync.util");
 
 const getAllMembers = catchAsync(async (req, res) => {
-    const membersAll = await members.findAll();
+    const allMembers = await members.findAll();
 
-    res.status(201).json({
+    res.status(200).json({
         status: true,
         message: "Miembros obtenidos exitosamente",
-        data: membersAll
+        data: allMembers
     });
 });
 
