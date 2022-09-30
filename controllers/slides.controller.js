@@ -11,6 +11,7 @@ const deleteSlide = catchAsync(async (req, res) => {
     message: "Slide eliminado",
     data: slide,
   });
+  
 });
 
 module.exports = {
