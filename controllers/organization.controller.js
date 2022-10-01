@@ -23,7 +23,6 @@ const updateOrganization = catchAsync(async (req, res) => {
 });
 
 const getOrganizationById = catchAsync(async (req, res) => {
-    console.log("Entra");
     const organizationObj = {
         name: req.organization.name,
         image: req.organization.image,
