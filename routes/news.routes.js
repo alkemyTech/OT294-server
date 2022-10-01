@@ -13,11 +13,12 @@ const {
 
 // Middlewares
 const { newsExists } = require("../middlewares/news.middleware");
+const { authAdmin } = require("../middlewares/authAdmin.middleware");
 
 newsRouter.post("/", createNews);
 newsRouter.get("/", getAllNews);
 newsRouter.get("/deleted", getNewsDeleted);
-newsRouter.get("/:id", getNewsById);
+newsRouter.get("/:id", authAdmin, getNewsById);
 newsRouter.put("/:id", newsExists, updateNews);
 newsRouter.delete("/:id", newsExists, deleteNews);
 
