@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { createActivityValidators } = require("../validators/activities.validator");
-const { updateActivity } = require("../controllers/activities.controller");
+const { createActivityValidators, updateActivityValidators } = require("../validators/activities.validator");
+const { updateActivity, createActivity } = require("../controllers/activities.controller");
+const { authAdmin } = require("../middlewares/authAdmin.middleware");
 
-router.put("/activities/:id", createActivityValidators, updateActivity);
+router.post("/", authAdmin, createActivityValidators, createActivity);
+router.put("/activities/:id", updateActivityValidators, updateActivity);
 
 module.exports = router;
