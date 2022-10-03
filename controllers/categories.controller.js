@@ -42,9 +42,20 @@ const getCategoryById = catchAsync(async (req, res) => {
     });
 });
 
+const getCategories = catchAsync(async (req, res) => {
+    const categories = await Category.findAll();
+
+    res.status(200).json({
+        status: true,
+        message: "Las categorías se han obtenido",
+        data: categories
+    });
+});
+
 module.exports = {
     deleteCategory,
     updateCategory,
     createCategory,
-    getCategoryById
+    getCategoryById,
+    getCategories
 };

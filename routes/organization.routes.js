@@ -1,16 +1,29 @@
 const express = require("express");
 
 //controllers
-const { updateOrganization } = require("../controllers/organization.controller");
+const {
+  getSlidesByOrganization,
+  updateOrganization,
+} = require("../controllers/organization.controller");
 
 //middlewares
 const { authAdmin } = require("../middlewares/authAdmin.middleware");
-const { createOrganizationValidators } = require("../validators/organizations.validator");
+const {
+  organizationExists,
+} = require("../middlewares/organization.middleware");
+const {
+  createOrganizationValidators,
+} = require("../validators/organizations.validator");
 
+const organizationRouter = express.Router();
 
-const router = express.Router();
+newsRouter.get("/:id", organizationExists, getSlidesByOrganization);
 
-router.post("/public", authAdmin, createOrganizationValidators, updateOrganization);
+organizationRouter.post(
+  "/public",
+  authAdmin,
+  createOrganizationValidators,
+  updateOrganization
+);
 
-
-module.exports = router;
+module.exports = organizationRouter;
