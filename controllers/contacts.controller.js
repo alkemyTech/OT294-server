@@ -10,7 +10,12 @@ const createContacts = catchAsync(async (req, res) => {
     data: { contacts }
   });
 });
+const listContacts = (async (req, res) => {
+    const contacts = await Contacts.findAll();
+    res.status(200).json({status: true, message: "Lista de contactos",data: { contacts }});
+});
 
 module.exports = {
   createContacts,
+  listContacts
 };
