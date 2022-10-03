@@ -16,6 +16,7 @@ const organizationExists = catchAsync(async (req, res, next) => {
 
     req.organization = organization;
     next();
+
 });
 
 module.exports = { organizationExists };
