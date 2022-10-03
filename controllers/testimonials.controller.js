@@ -1,9 +1,19 @@
 // Models
-// const { Testimonials } = require("../models");
+const { Testimonials } = require("../models");
 
 // Utils
-// const { catchAsync } = require("../utils/catchAsync.util");
+const { catchAsync } = require("../utils/catchAsync.util");
 
-// const getAllTestimonials = catchAsync(async (req, res, next) => {
+const createTestimonial = catchAsync(async (req, res, next) => {
+    const { name, content } = req.body;
+    const testimonial = await Testimonials.create({ name, content });
 
-//   });
+    res.status(201).json({
+        status: "true",
+        message: "Testimonio creado con exito",
+        data: testimonial,
+    });
+
+});
+
+module.exports = { createTestimonial };

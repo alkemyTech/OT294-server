@@ -2,10 +2,12 @@ const express = require("express");
 const testimonialsRouter = express.Router();
 
 // Controllers
-// const {} = require("../controllers/testimonials.controller");
+const { createTestimonial } = require("../controllers/testimonials.controller");
 
-testimonialsRouter.get("/" /*funcion controlador*/);
+// Middleware
+const { authAdmin } = require("../middlewares/authAdmin.middleware");
+const { createTestimonialValidators } = require("../validators/testimonials.validator");
 
-module.exports = {
-    testimonialsRouter
-};
+testimonialsRouter.post("/", createTestimonialValidators, authAdmin, createTestimonial);
+
+module.exports = testimonialsRouter;
