@@ -1,11 +1,15 @@
 const express = require("express");
 const testimonialsRouter = express.Router();
 
+// Middlewares
+const { authAdmin } = require('../middlewares/authAdmin.middleware')
+const { createTestimonialValidators } = require("../validators/testimonials.validator");
+
 // Controllers
-// const {} = require("../controllers/testimonials.controller");
+const { createTestimonial, deleteTestimonial } = "../controllers/testimonials.controller";
 
-testimonialsRouter.get("/" /*funcion controlador*/);
+testimonialsRouter.post("/",createTestimonialValidators, authAdmin, createTestimonial);
 
-module.exports = {
-    testimonialsRouter
-};
+testimonialsRouter.delete("/:id", testimonialsExists, authAdmin, deleteTestimonial)
+
+module.exports = testimonialsRouter

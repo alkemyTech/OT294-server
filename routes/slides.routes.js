@@ -3,13 +3,29 @@ const slidesRouter = express.Router();
 
 // Controllers
 const {
-  deleteSlide,
+  createSlide,
+  getSlideById,
+  getAllSlides,
   updateSlide,
+  deleteSlide,
 } = require("../controllers/slides.controller");
 
 // Middlewares
 const { authAdmin } = require("../middlewares/authAdmin.middleware");
 const { slideExists } = require("../middlewares/slide.middleware");
+const { createSlideValidators } = require("../validators/slide.validator");
+
+slidesRouter.post(
+  "/",
+  authAdmin,
+  upload.single("imageUrl"),
+  createSlideValidators,
+  createSlide
+);
+
+slidesRouter.get("/:id", authAdmin, slideExists, getSlideById);
+
+slidesRouter.get("/", authAdmin, getAllSlides);
 
 slidesRouter.patch(
   "/:id",
