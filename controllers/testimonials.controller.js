@@ -24,6 +24,6 @@ const deleteTestimonial = catchAsync(async (req, res, next) => {
         status: true,
         message: "Testimonio eliminado con exito"
     });
-})
+});
 
 module.exports = { createTestimonial, deleteTestimonial };
