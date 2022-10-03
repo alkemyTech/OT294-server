@@ -15,8 +15,10 @@ const createSlideValidators = [
   body("order")
     .notEmpty()
     .withMessage("order no puede estar vacio")
-    .isString()
-    .withMessage("order debe ser texto"),
+    .isNumeric()
+    .withMessage("order no es numerico")
+    .custom((val) => val > 0)
+    .withMessage("order no puede ser un valor negativo"),
   body("organizationId")
     .notEmpty()
     .withMessage("organizationId no puede estar vacio")
