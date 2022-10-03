@@ -49,19 +49,20 @@ const createSlide = catchAsync(async (req, res) => {
   });
 });
 
-const deleteSlide = catchAsync(async (req, res) => {
+const getSlideById = catchAsync(async (req, res) => {
   const { slide } = req;
 
   await slide.destroy();
 
   res.status(200).json({
     status: true,
-    message: "Slide eliminado",
+    message: "Detalle de slide",
     data: slide,
   });
 });
 
 module.exports = {
+  getSlideById,
   createSlide,
   deleteSlide,
 };

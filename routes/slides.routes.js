@@ -3,6 +3,7 @@ const slidesRouter = express.Router();
 
 // Controllers
 const {
+ getSlideById,
   createSlide,
   deleteSlide,
 } = require("../controllers/slides.controller");
@@ -20,6 +21,6 @@ slidesRouter.post(
   createSlide
 );
 
-slidesRouter.delete("/:id", authAdmin, slideExists, deleteSlide);
+slidesRouter.get("/:id", authAdmin, slideExists, getSlideById);
 
 module.exports = slidesRouter;
