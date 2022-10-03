@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       phone: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       email: {
         type: Sequelize.STRING
@@ -30,7 +30,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      paranoid: {
+          type: Sequelize.BOOLEAN,
+        },
     });
   },
   async down(queryInterface, Sequelize) {

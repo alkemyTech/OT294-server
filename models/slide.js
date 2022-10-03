@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       imageUrl: DataTypes.STRING,
       text: DataTypes.STRING,
-      order: DataTypes.STRING,
+      order: DataTypes.INTEGER,
       organizationId: DataTypes.INTEGER,
       deletedAt: DataTypes.DATE,
     },
