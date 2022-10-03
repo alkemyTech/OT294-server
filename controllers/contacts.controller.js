@@ -11,6 +11,16 @@ const createContacts = catchAsync(async (req, res) => {
   });
 });
 
+const backOficeContacts = catchAsync(async (req, res) => {
+  const contacts = await Contacts.find({attributes: ["id", "name", "email", "phone", "message"]});
+  res.status(200).json({
+    status: true,
+    message: "Contactos encontrados",
+    data: { contacts }
+  });
+})
+
 module.exports = {
   createContacts,
+  backOficeContacts
 };
