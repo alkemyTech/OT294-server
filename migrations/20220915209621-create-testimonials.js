@@ -15,6 +15,9 @@ module.exports = {
             image: {
                 type: Sequelize.STRING
             },
+            roleId: {
+                type: Sequelize.INTEGER
+            },
             content: {
                 type: Sequelize.STRING
             },
