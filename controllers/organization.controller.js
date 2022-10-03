@@ -45,7 +45,10 @@ const getOrganizationById = catchAsync(async (req, res) => {
         name: req.organization.name,
         image: req.organization.image,
         phone: req.organization.phone,
-        address: req.organization.address
+        address: req.organization.address,
+        facebook: req.organization.urlFacebook,
+        linkedin: req.organization.urlLinkedin,
+        instagram: req.organization.urlInstagram
     };
     res.json({
         status: true,
