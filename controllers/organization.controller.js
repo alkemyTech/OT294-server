@@ -40,7 +40,23 @@ const updateOrganization = catchAsync(async (req, res) => {
   });
 });
 
+const getOrganizationById = catchAsync(async (req, res) => {
+    const organizationObj = {
+        name: req.organization.name,
+        image: req.organization.image,
+        phone: req.organization.phone,
+        address: req.organization.address
+    };
+    res.json({
+        status: true,
+        message: "La informacion de las organizaciones ha sido obtenida",
+        data: organizationObj
+    });
+});
+
 module.exports = {
-  getSlidesByOrganization,
   updateOrganization,
+  getOrganizationById,
+  getSlidesByOrganization,
+  updateOrganization
 };
