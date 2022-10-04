@@ -40,7 +40,7 @@ const createUser = catchAsync(async (req, res) => {
     newUser.password = undefined;
 
     // Send welcome email
-    await new Email(email).sendWelcome(firstName);
+    await new Email(email).sendWelcome(firstName, lastName);
 
     res.status(201).json({
         status: true,
