@@ -28,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
 //app.use(authMiddleware);
 
 app.use("/users", usersRouter);
@@ -36,7 +37,7 @@ app.use("/categories", categoriesRouter);
 app.use("/auth", authRouter);
 app.use("/activities", activitiesRouter);
 app.use("/organization", organizationRouter);
-app.use("/testimonials", testimonialsRouter)
+app.use("/testimonials", testimonialsRouter);
 app.use("/slides", slidesRouter);
 app.use("/members", membersRouter);
 app.use("/contacts", contactsRouter);
