@@ -15,6 +15,20 @@ const createTestimonial = catchAsync(async (req, res, next) => {
     });
 });
 
+const updateTestimonial = catchAsync(async (req, res, next) => {
+    const { testimonial } = req
+    const { name, content } = req.body;
+    
+    await testimonial.update({ name, content });
+
+    res.status(200).json({
+        status: true,
+        message: "Testimonio actualizado con exito",
+        data: testimonial,
+    });
+
+});
+
 const deleteTestimonial = catchAsync(async (req, res, next) => {
     const { testimonial } = req
 
@@ -26,4 +40,4 @@ const deleteTestimonial = catchAsync(async (req, res, next) => {
     });
 });
 
-module.exports = { createTestimonial, deleteTestimonial };
+module.exports = { createTestimonial, updateTestimonial, deleteTestimonial };

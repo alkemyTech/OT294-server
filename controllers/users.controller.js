@@ -40,7 +40,7 @@ const createUser = catchAsync(async (req, res) => {
     newUser.password = undefined;
 
     // Send welcome email
-    await new Email(email).sendWelcome(firstName);
+    await new Email(email).sendWelcome(firstName, lastName);
 
     res.status(201).json({
         status: true,
@@ -97,4 +97,15 @@ const updateUser = catchAsync(async (req, res) => {
     });
 });
 
-module.exports = { getAllUsers, createUser, loginUser, updateUser };
+const deleteUser = catchAsync(async (req, res) => {
+    const { user } = req;
+    await user.destroy();
+
+    res.status(200).json({
+        status: true,
+        message: "Usuario borrado correctamente",
+        data: user
+    });
+});
+
+module.exports = { getAllUsers, createUser, loginUser, updateUser,deleteUser };
