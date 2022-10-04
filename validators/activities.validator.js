@@ -2,7 +2,7 @@ const { body } = require("express-validator");
 const { checkResult } = require("../utils/checkResult.util");
 
 
-const createActivityValidators = [
+const updateActivityValidators = [
     body("id")
         .notEmpty()
         .withMessage("id no puede estar vacio")
@@ -12,8 +12,18 @@ const createActivityValidators = [
         .withMessage("id no puede ser un valor negativo"),
     checkResult,
 ];
+const createActivityValidators = [
+    body("name")
+        .notEmpty()
+        .withMessage("el campo name no puede estar vacio"),
+    body("content")
+        .notEmpty()
+        .withMessage("el campo content no puede estar vacio"),
+    checkResult,
+];
 
 
 module.exports = {
-    createActivityValidators
+    createActivityValidators,
+    updateActivityValidators
 };
