@@ -28,8 +28,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-//app.use(authMiddleware);
 
+//app.use(authMiddleware);
 app.use("/users", usersRouter);
 app.use("/news", newsRouter);
 app.use("/categories", categoriesRouter);
@@ -40,6 +40,7 @@ app.use("/testimonials", testimonialsRouter)
 app.use("/slides", slidesRouter);
 app.use("/members", membersRouter);
 app.use("/contacts", contactsRouter);
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
