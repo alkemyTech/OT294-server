@@ -11,6 +11,10 @@ const createContacts = catchAsync(async (req, res) => {
     data: { contacts },
   });
 });
+const listContacts = catchAsync(async (req, res) => {
+    const contacts = await Contacts.findAll();
+    res.status(200).json({status: true, message: "Lista de contactos",data: { contacts }});
+});
 
 const backOficeContacts = catchAsync(async (req, res) => {
   const contacts = await Contacts.find({attributes: ["id", "name", "email", "phone", "message"]});
@@ -23,5 +27,6 @@ const backOficeContacts = catchAsync(async (req, res) => {
 
 module.exports = {
   createContacts,
+  listContacts,
   backOficeContacts
 };
