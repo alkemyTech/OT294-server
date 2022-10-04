@@ -19,7 +19,7 @@ const updateTestimonial = catchAsync(async (req, res, next) => {
     const { testimonial } = req
     const { name, content } = req.body;
     
-    await Testimonials.update({ name, content });
+    await testimonial.update({ name, content });
 
     res.status(200).json({
         status: true,
