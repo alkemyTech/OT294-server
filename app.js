@@ -12,19 +12,10 @@ const categoriesRouter = require("./routes/categories.routes");
 const organizationRouter = require("./routes/organization.routes");
 const authRouter = require("./routes/auth.routes");
 const activitiesRouter = require("./routes/activities.routes");
-<<<<<<< HEAD
-<<<<<<< HEAD
-const testimonialsRouter = require("./routes/testimonials.routes")
-=======
-const slidesRouter = require("./routes/slides.routes");
-const membersRouter = require("./routes/members.routes");
->>>>>>> 24d9cf96174477aa8241f70299a74f4dfa14c64c
-=======
 const testimonialsRouter = require("./routes/testimonials.routes")
 const slidesRouter = require("./routes/slides.routes");
 const membersRouter = require("./routes/members.routes");
 const contactsRouter = require("./routes/contacts.routes");
->>>>>>> c58a7e0116f2f590085027d9daa40bb0127916d3
 const app = express();
 app.use(cors());
 
@@ -37,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
 //app.use(authMiddleware);
 
 app.use("/users", usersRouter);
@@ -45,20 +37,10 @@ app.use("/categories", categoriesRouter);
 app.use("/auth", authRouter);
 app.use("/activities", activitiesRouter);
 app.use("/organization", organizationRouter);
-<<<<<<< HEAD
-<<<<<<< HEAD
 app.use("/testimonials", testimonialsRouter);
-=======
-app.use("/slides", slidesRouter);
-app.use("/members", membersRouter);
->>>>>>> 24d9cf96174477aa8241f70299a74f4dfa14c64c
-
-=======
-app.use("/testimonials", testimonialsRouter)
 app.use("/slides", slidesRouter);
 app.use("/members", membersRouter);
 app.use("/contacts", contactsRouter);
->>>>>>> c58a7e0116f2f590085027d9daa40bb0127916d3
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
