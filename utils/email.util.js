@@ -50,8 +50,8 @@ class Email {
         });
     }
 
-    async sendWelcome(firstName) {
-        await this.send("welcome", "Welcome to our app", { firstName });
+    async sendWelcome(firstName, lastName) {
+        await this.send("welcome", "Bienvenido a la familia 'Somos Más'", { firstName, lastName });
     }
 }
 
