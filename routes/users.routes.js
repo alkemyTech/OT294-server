@@ -1,7 +1,7 @@
 const express = require("express");
 
 //Controllers
-const { getAllUsers, createUser, loginUser, updateUser } = require("../controllers/users.controller");
+const { getAllUsers, createUser, loginUser, updateUser, deleteUser } = require("../controllers/users.controller");
 
 // Middlewares
 const { createUserValidators } = require("../validators/users.validator");
@@ -21,5 +21,8 @@ router.post("/auth/login", loginUser);
 
 /* PATCH  users updated */
 router.patch("/users/:id", userExists, updateUser);
+
+/* DELETE  user */
+router.delete("/:id", userExists, deleteUser);
 
 module.exports = router;
