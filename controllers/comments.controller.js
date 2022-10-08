@@ -1,4 +1,6 @@
+// Utils
 const { catchAsync } = require("../utils/catchAsync.util");
+const { AppError } = require("../utils/appError.util");
 
 const updateComment = catchAsync(async (req, res) => {
   const { comment, sessionUser } = req;
