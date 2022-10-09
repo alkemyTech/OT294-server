@@ -29,7 +29,7 @@ npm start
 
 ```
 Listado de usuarios
-<!-- Usuarios administradores con ROLE = 0 -->
+<!-- Usuarios administradores con ROLE = 1 -->
 {email: testuseralkemy1@yopmail.com,
 password: pass1234
 },
@@ -60,7 +60,7 @@ password: pass1234
 {email: testuseralkemy10@yopmail.com,
 password: pass1234
 }
-<!-- Usuarios estandar o regulares con ROLE = 1 -->
+<!-- Usuarios estandar o regulares con ROLE = 2 -->
 {email: testuseralkemy11@yopmail.com,
 password: pass1234
 },
