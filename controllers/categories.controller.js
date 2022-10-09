@@ -1,4 +1,5 @@
 const { catchAsync } = require("../utils/catchAsync.util");
+const { AppError } = require("../utils/appError.util")
 const { Category } = require("../models");
 
 const updateCategory = catchAsync(async (req, res) => {
