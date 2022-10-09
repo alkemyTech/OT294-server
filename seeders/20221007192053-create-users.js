@@ -9,7 +9,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 0,
+      roleId: 1,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -20,7 +20,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 0,
+      roleId: 1,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -31,7 +31,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 0,
+      roleId: 1,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -42,7 +42,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 0,
+      roleId: 1,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -53,7 +53,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 0,
+      roleId: 1,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -64,7 +64,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 0,
+      roleId: 1,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -75,7 +75,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 0,
+      roleId: 1,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -86,7 +86,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 0,
+      roleId: 1,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -97,7 +97,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 0,
+      roleId: 1,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -108,7 +108,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 0,
+      roleId: 1,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -119,7 +119,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 1,
+      roleId: 2,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -130,7 +130,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 1,
+      roleId: 2,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -141,7 +141,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 1,
+      roleId: 2,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -152,7 +152,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 1,
+      roleId: 2,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -163,7 +163,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 1,
+      roleId: 2,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -174,7 +174,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 1,
+      roleId: 2,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -185,7 +185,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 1,
+      roleId: 2,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -196,7 +196,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 1,
+      roleId: 2,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -207,7 +207,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 1,
+      roleId: 2,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
@@ -218,7 +218,7 @@ module.exports = {
       // Important: Password not encrypted yet!
       password: "pass1234",
       status: "active",
-      roleId: 1,
+      roleId: 2,
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       createdAt: new Date,
       updatedAt: new Date
