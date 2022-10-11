@@ -25,6 +25,13 @@ const getAllMembers = catchAsync(async (req, res) => {
     });
 });
 
+const updateMember = catchAsync(async (req, res) => {
+    const {id} = req.params;
+    const {body} = req;
+    const result = await members.update(body,{where:{id}});
+    res.status(200).json({status: true, message: "Miembro actualizado exitosamente", data:{result}});
+});
+
 const deleteMember = catchAsync(async (req, res) => {
     const { member } = req;
 
@@ -37,4 +44,4 @@ const deleteMember = catchAsync(async (req, res) => {
     });
 });
 
-module.exports = { getAllMembers, createMember };
+module.exports = { getAllMembers, createMember, updateMember };
