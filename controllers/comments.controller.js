@@ -22,6 +22,29 @@ const deleteComment = catchAsync(async (req, res, next) => {
     });
 });
 
+const updateComment = catchAsync(async (req, res) => {
+  const { comment, sessionUser } = req;
+  const { body } = req.body;
+
+  if (sessionUser.id !== comment.userId || sessionUser.roleId !== 0) {
+    return next(
+      new AppError(
+        "Usted no tiene permisos para actualizar este comentario",
+        404
+      )
+    );
+  }
+
+  await comment.update({ body });
+
+  res.status(200).json({
+    status: true,
+    message: "El comentario ha sido actualizado",
+    data: comment,
+  });
+});
+
 module.exports = {
-    deleteComment
+  updateComment,
+   deleteComment
 };
