@@ -17,7 +17,7 @@ const updateComment = catchAsync(async (req, res) => {
 
   await comment.update({ body });
 
-  res.json({
+  res.status(200).json({
     status: true,
     message: "El comentario ha sido actualizado",
     data: comment,
