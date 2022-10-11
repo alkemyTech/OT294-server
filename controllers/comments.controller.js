@@ -1,9 +1,9 @@
 const { catchAsync } = require("../utils/catchAsync.util");
-const { Comments } = require("../models");
+const { Comment } = require("../models");
 
 
 const getAllComments = catchAsync(async (req, res) => {
-    const comments = await Comments.findAll({attributes:["body"], order:["createdAt","DESC"]});
+    const comments = await Comment.findAll({attributes:["body"], order:[["createdAt","DESC"]]});
     res.status(200).json({ status: true, message: "Lista de comentarios", data: { comments } });
 });
 
