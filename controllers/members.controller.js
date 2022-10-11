@@ -2,6 +2,8 @@
 const { catchAsync } = require("../utils/catchAsync.util");
 // Models
 const { members } = require("../models");
+require("dotenv").config();
+const BASE_URL = process.env.BASE_URL;
 
 
 const createMember = catchAsync(async (req, res) => {
@@ -16,12 +18,18 @@ const createMember = catchAsync(async (req, res) => {
 });
 
 const getAllMembers = catchAsync(async (req, res) => {
-    const allMembers = await members.findAll();
-
+    const { page } = req.query;
+    const resultsPerPage = 10;
+    const allMembers = await members.findAll({ limit: resultsPerPage, offset: (page - 1) * resultsPerPage });
+    let responseObj = { page };
+    Number(page) > 1 && (responseObj.prevPage = BASE_URL + "members?page=" + (Number(page) - 1));
+    console.log(allMembers.length);
+    allMembers.length === resultsPerPage && (responseObj.nextPage = BASE_URL + "members?page=" + (Number(page) + 1));
+    responseObj.members = allMembers;
     res.status(200).json({
         status: true,
         message: "Miembros obtenidos exitosamente",
-        data: allMembers
+        data: responseObj
     });
 });
 
