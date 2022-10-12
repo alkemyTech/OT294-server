@@ -19,12 +19,20 @@ const createNews = catchAsync(async (req, res) => {
 
 
 const getAllNews = catchAsync(async (req, res) => {
-    const news = await News.findAll({ where: { deletedAt: null } });
+    let page = req.query.pag || 0;
+    const news = await News.findAndCountAll({limit:2, offset: +page *2});
+    const totalPages = Math.ceil(news.count / 2);
 
-    res.status(201).json({
+    res.status(200).json({
         status: "true",
-        message: "Listado de noticias",
-        data: news,
+        message: "Novedades obtenidas con exito",
+        data: {
+            page: +page,
+            content: news.rows,
+            totalPages,
+            nextPage: `GET /comments/?pag=${+page < totalPages ? +page+1 : null}`,
+            previusPage: `GET /comments/?page=${+page > 0 ? +page-1 : null}`
+        }
     });
 });
 
