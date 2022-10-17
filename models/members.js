@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         deletedAt: DataTypes.STRING
     }, {
         sequelize,
-        modelName: "members",
+        modelName: "Members",
         paranoid: true,
     });
     return members;
