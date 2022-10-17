@@ -5,6 +5,11 @@ const { Comments } = require("../models");
 const { catchAsync } = require("../utils/catchAsync.util");
 const { AppError } = require("../utils/appError.util");
 
+const getAllComments = catchAsync(async (req, res) => {
+  const comments = await Comment.findAll({attributes:["body"], order:[["createdAt","DESC"]]});
+  res.status(200).json({ status: true, message: "Lista de comentarios", data: { comments } });
+});
+
 const deleteComment = catchAsync(async (req, res, next) => {
 
     const { comment, sessionUser } = req;
@@ -44,7 +49,21 @@ const updateComment = catchAsync(async (req, res) => {
   });
 });
 
+const createComment = catchAsync(async (req, res) => {
+  const { user_id, news_id, body } = req.body;
+  const comment = await Comments.create({ news_id, user_id, body });
+
+  res.status(201).json({
+      status: "true",
+      message: "Comentario creado con exito",
+      data: comment,
+  });
+});
+
 module.exports = {
   updateComment,
-   deleteComment
+  deleteComment,
+  getAllComments,
+  createComment
+
 };
