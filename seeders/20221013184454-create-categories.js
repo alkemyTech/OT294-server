@@ -4,210 +4,210 @@ module.exports = {
     up: async (queryInterface, Sequelize) => {
         await queryInterface.bulkInsert("Categories", [
             {
-                name: "Image 1",
+                name: "Imagen 1",
                 description: "Imagen 1",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 2",
+                name: "Imagen 2",
                 description: "Imagen 2",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 3",
+                name: "Imagen 3",
                 description: "Imagen 3",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 4",
+                name: "Imagen 4",
                 description: "Imagen 4",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 5",
+                name: "Imagen 5",
                 description: "Imagen 5",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 6",
+                name: "Imagen 6",
                 description: "Imagen 6",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 7",
+                name: "Imagen 7",
                 description: "Imagen 7",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 8",
+                name: "Imagen 8",
                 description: "Imagen 8",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 9",
+                name: "Imagen 9",
                 description: "Imagen 9",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 10",
+                name: "Imagen 10",
                 description: "Imagen 10",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 11",
+                name: "Imagen 11",
                 description: "Imagen 11",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 12",
+                name: "Imagen 12",
                 description: "Imagen 12",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 13",
+                name: "Imagen 13",
                 description: "Imagen 13",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 14",
+                name: "Imagen 14",
                 description: "Imagen 14",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 15",
+                name: "Imagen 15",
                 description: "Imagen 15",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 16",
+                name: "Imagen 16",
                 description: "Imagen 16",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 17",
+                name: "Imagen 17",
                 description: "Imagen 17",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 18",
+                name: "Imagen 18",
                 description: "Imagen 18",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 19",
+                name: "Imagen 19",
                 description: "Imagen 19",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 20",
+                name: "Imagen 20",
                 description: "Imagen 20",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 21",
+                name: "Imagen 21",
                 description: "Imagen 21",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 22",
+                name: "Imagen 22",
                 description: "Imagen 22",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 23",
+                name: "Imagen 23",
                 description: "Imagen 23",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 24",
+                name: "Imagen 24",
                 description: "Imagen 24",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 25",
+                name: "Imagen 25",
                 description: "Imagen 25",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 26",
+                name: "Imagen 26",
                 description: "Imagen 26",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 27",
+                name: "Imagen 27",
                 description: "Imagen 27",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 28",
+                name: "Imagen 28",
                 description: "Imagen 28",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 29",
+                name: "Imagen 29",
                 description: "Imagen 29",
                 image: "none",
                 createdAt: new Date,
                 updatedAt: new Date
             },
             {
-                name: "Image 30",
+                name: "Imagen 30",
                 description: "Imagen 30",
                 image: "none",
                 createdAt: new Date,
