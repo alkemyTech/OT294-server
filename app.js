@@ -6,6 +6,11 @@ const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 
+// swagger
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
+const { swaggerSpec } = require("./swagger/swagger");
+
 const usersRouter = require("./routes/users.routes");
 const newsRouter = require("./routes/news.routes");
 const categoriesRouter = require("./routes/categories.routes");
@@ -32,6 +37,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 //app.use(authMiddleware);
+
+app.use("/news-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
 
 app.use("/users", usersRouter);
 app.use("/news", newsRouter);
