@@ -36,7 +36,7 @@ describe("Test endpoints Testimonials", () => {
     it("Error en url creacion", (done) => {
       chai
         .request(url)
-        .post("/testimonials")
+        .post("/testimonia")
         .end(function (err, res) {
           expect(res).to.have.status(404);
           done();
@@ -69,7 +69,7 @@ describe("Test endpoints Testimonials", () => {
     it("Error en url listado", (done) => {
       chai
         .request(url)
-        .get("/testimonials")
+        .get("/testimonia")
         .send({})
         .end(function (err, res) {
           expect(res).to.have.status(404);
