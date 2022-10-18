@@ -1,8 +1,35 @@
 // Models
-const { Slide } = require("../models");
+const { Slide, Organization } = require("../models");
 
 // Utils
 const { catchAsync } = require("../utils/catchAsync.util");
+
+const createOrganization = catchAsync(async (req, res) => {
+  const { organization } = req;
+  const { name, image, address, phone, email, welcomeText, aboutUsText, facebook, linkedin, instagram } =
+    req.body;
+
+    console.log(welcomeText);
+
+  const organizationcreated = await Organization.create({
+    name,
+    image,
+    address,
+    phone,
+    email,
+    welcomeText,
+    aboutUsText,
+    facebook,
+    linkedin,
+    instagram
+  });
+
+  res.status(201).json({
+    status: true,
+    message: "La organizacion ha sido creada",
+    data: organizationcreated,
+  });
+});
 
 const getSlidesByOrganization = catchAsync(async (req, res) => {
   const { organization } = req;
@@ -20,7 +47,7 @@ const getSlidesByOrganization = catchAsync(async (req, res) => {
 
 const updateOrganization = catchAsync(async (req, res) => {
   const { organization } = req;
-  const { name, image, address, phone, email, welcomeText, aboutUsText } =
+  const { name, image, address, phone, email, welcomeText, aboutUsText, facebook, linkedin, instagram } =
     req.body;
 
   const organizationUpdated = await organization.update({
@@ -31,9 +58,12 @@ const updateOrganization = catchAsync(async (req, res) => {
     email,
     welcomeText,
     aboutUsText,
+    facebook, 
+    linkedin, 
+    instagram
   });
 
-  res.json({
+  res.status(201).json({
     status: true,
     message: "La informacion de la organizacion ha sido actualizada",
     data: organizationUpdated,
@@ -42,6 +72,7 @@ const updateOrganization = catchAsync(async (req, res) => {
 
 const getOrganizationById = catchAsync(async (req, res) => {
     const organizationObj = {
+        id: req.organization.id,
         name: req.organization.name,
         image: req.organization.image,
         phone: req.organization.phone,
@@ -50,7 +81,7 @@ const getOrganizationById = catchAsync(async (req, res) => {
         linkedin: req.organization.urlLinkedin,
         instagram: req.organization.urlInstagram
     };
-    res.json({
+    res.status(200).json({
         status: true,
         message: "La informacion de las organizaciones ha sido obtenida",
         data: organizationObj
@@ -58,8 +89,8 @@ const getOrganizationById = catchAsync(async (req, res) => {
 });
 
 module.exports = {
-  updateOrganization,
+  createOrganization,
   getOrganizationById,
   getSlidesByOrganization,
   updateOrganization
-};
+}
