@@ -16,10 +16,11 @@ module.exports = (sequelize, DataTypes) => {
     Comment.init({
         user_id: DataTypes.INTEGER,
         body: DataTypes.STRING,
-        post_id: DataTypes.INTEGER
+        news_id: DataTypes.INTEGER
     }, {
         sequelize,
-        modelName: "Comment",
+        modelName: "Comments",
+        paranoid: true
     });
     return Comment;
 };

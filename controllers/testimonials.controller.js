@@ -10,7 +10,7 @@ const createTestimonial = catchAsync(async (req, res, next) => {
   const testimonial = await Testimonials.create({ name, content });
 
   res.status(201).json({
-    status: "true",
+    status: true,
     message: "Testimonio creado con exito",
     data: testimonial,
   });

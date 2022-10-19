@@ -11,7 +11,7 @@ const organizationExists = catchAsync(async (req, res, next) => {
     const organization = await Organization.findOne({ where: { id } });
 
     if (!organization) {
-        return next(new AppError("La organización con el id proporcionado no existe", 404));
+        return next(new AppError("Organizacion no encontrada", 404));
     }
 
     req.organization = organization;

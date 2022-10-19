@@ -14,7 +14,7 @@ module.exports = {
             body: {
                 type: Sequelize.STRING
             },
-            post_id: {
+            news_id: {
                 type: Sequelize.INTEGER
             },
             createdAt: {

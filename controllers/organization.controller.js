@@ -1,5 +1,5 @@
 // Models
-const { Slide } = require("../models");
+const { Slide, Organization } = require("../models");
 
 // Utils
 const { catchAsync } = require("../utils/catchAsync.util");
@@ -12,7 +12,7 @@ const getSlidesByOrganization = catchAsync(async (req, res) => {
   const orderedSlides = slides.sort((a, b) => a.order - b.order);
 
   res.status(200).json({
-    status: "true",
+    status: true,
     message: "Listado de slides",
     data: orderedSlides,
   });
@@ -23,7 +23,7 @@ const updateOrganization = catchAsync(async (req, res) => {
   const { name, image, address, phone, email, welcomeText, aboutUsText } =
     req.body;
 
-  const organizationUpdated = await organization.update({
+  await organization.update({
     name,
     image,
     address,
@@ -36,24 +36,17 @@ const updateOrganization = catchAsync(async (req, res) => {
   res.json({
     status: true,
     message: "La informacion de la organizacion ha sido actualizada",
-    data: organizationUpdated,
+    data: organization
   });
 });
 
 const getOrganizationById = catchAsync(async (req, res) => {
-    const organizationObj = {
-        name: req.organization.name,
-        image: req.organization.image,
-        phone: req.organization.phone,
-        address: req.organization.addressgit,
-        facebook: req.organization.urlFacebook,
-        linkedin: req.organization.urlLinkedin,
-        instagram: req.organization.urlInstagram
-    };
-    res.json({
+  const { organization } = req
+
+    res.status(200).json({
         status: true,
         message: "La informacion de las organizaciones ha sido obtenida",
-        data: organizationObj
+        data: organization
     });
 });
 

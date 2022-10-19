@@ -9,6 +9,7 @@ const {
     getNewsById,
     updateNews,
     deleteNews,
+    getCommentsByNews
 } = require("../controllers/news.controller");
 
 // Middlewares
@@ -21,6 +22,7 @@ newsRouter.get("/deleted", getNewsDeleted);
 newsRouter.get("/:id", authAdmin, getNewsById);
 newsRouter.put("/:id", newsExists, updateNews);
 newsRouter.delete("/:id", newsExists, deleteNews);
+newsRouter.get("/:id/comments", newsExists, getCommentsByNews);
 
 module.exports =
     newsRouter;

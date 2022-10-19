@@ -1,5 +1,5 @@
 // Models
-const { News } = require("../models");
+const { News,Comment } = require("../models");
 
 // Utils
 const { catchAsync } = require("../utils/catchAsync.util");
@@ -11,7 +11,7 @@ const createNews = catchAsync(async (req, res) => {
     const news = await News.create({ name, content, image, categoryId });
 
     res.status(201).json({
-        status: "true",
+        status: true,
         message: "Noticia creada con exito",
         data: news,
     });
@@ -24,7 +24,7 @@ const getAllNews = catchAsync(async (req, res) => {
     const totalPages = Math.ceil(news.count / 2);
 
     res.status(200).json({
-        status: "true",
+        status: true,
         message: "Novedades obtenidas con exito",
         data: {
             page: +page,
@@ -43,8 +43,8 @@ const getNewsDeleted = catchAsync(async (req, res) => {
         return element.deletedAt !== null;
     });
 
-    res.status(201).json({
-        status: "true",
+    res.status(200).json({
+        status: true,
         message: "Listado de noticias",
         data: newsDeleted,
     });
@@ -58,8 +58,8 @@ const getNewsById = catchAsync(async (req, res, next) => {
         return next(new AppError("Noticia no encontrada", 404));
     }
 
-    res.status(201).json({
-        status: "true",
+    res.status(200).json({
+        status: true,
         message: "Detalle de noticias",
         data: news,
     });
@@ -71,8 +71,8 @@ const updateNews = catchAsync(async (req, res) => {
 
     await news.update({ name, content, image, categoryId, deletedAt });
 
-    res.status(201).json({
-        status: "true",
+    res.status(200).json({
+        status: true,
         message: "Noticia actualizada",
         data: news,
     });
@@ -95,6 +95,23 @@ const deleteNews = catchAsync(async (req, res) => {
 
 
 
+const getCommentsByNews = catchAsync(async (req, res, next) => {
+    const { news } = req;
+  
+    const comments = await Comment.findAll({ where: { news_id: news.id } });
+  
+    if (!comments) {
+      return next(new AppError("No hay comentarios en esta noticia", 404));
+    }
+  
+    res.status(200).json({
+      status: true,
+      message: "Listado de comentarios",
+      data: comments,
+    });
+  });
+
+
 
 module.exports = {
     createNews,
@@ -103,4 +120,5 @@ module.exports = {
     getNewsById,
     updateNews,
     deleteNews,
+    getCommentsByNews
 };

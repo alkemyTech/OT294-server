@@ -10,12 +10,12 @@ const { catchAsync } = require("../utils/catchAsync.util");
 const { AppError } = require("../utils/appError.util");
 const { Email } = require("../utils/email.util");
 
-dotenv.config({ path: "./.env.example" });
+dotenv.config({ path: "./.env" });
 
 const getAllUsers = catchAsync(async (req, res) => {
     const users = await User.findAll();
 
-    res.status(201).json({
+    res.status(200).json({
         status: true,
         message: "Usuarios obtenidos exitosamente",
         data: users
@@ -23,19 +23,26 @@ const getAllUsers = catchAsync(async (req, res) => {
 });
 
 const createUser = catchAsync(async (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, image, roleId, status } = req.body;
 
     // Hash password
     const salt = await bcrypt.genSalt(12);
     const hashPassword = await bcrypt.hash(password, salt);
+
     const SECRET_KEY = process.env.JWT_SECRET;
+    console.log(req.body)
     const newUser = await User.create({
         firstName,
         lastName,
         email,
         password: hashPassword,
+        image,
+        roleId,
+        status
     });
+
     const token = jwt.sign(newUser.id, SECRET_KEY);
+
     // Remove password from response
     newUser.password = undefined;
 
@@ -88,9 +95,21 @@ const updateUser = catchAsync(async (req, res) => {
     const { user } = req;
     const { firstName, lastName, email, image, password } = req.body;
 
-    await user.update({ firstName, lastName, email, image, password });
+    // Hash password
+    const salt = await bcrypt.genSalt(12);
+    const hashPassword = await bcrypt.hash(password, salt);
 
-    res.status(201).json({
+    await user.update({
+        firstName, 
+        lastName, 
+        email, 
+        image,
+        password: hashPassword
+    });
+
+    user.password = undefined;
+
+    res.status(200).json({
         status: true,
         message: "Usuario actualizado correctamente",
         data: user
@@ -108,4 +127,4 @@ const deleteUser = catchAsync(async (req, res) => {
     });
 });
 
-module.exports = { getAllUsers, createUser, loginUser, updateUser,deleteUser };
+module.exports = { getAllUsers, createUser, loginUser, updateUser, deleteUser };

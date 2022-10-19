@@ -14,7 +14,7 @@ const {
   deleteTestimonial,
   updateTestimonial,
   getTestimonials,
-} = "../controllers/testimonials.controller";
+} = require("../controllers/testimonials.controller");
 
 testimonialsRouter.get("/", getTestimonials);
 

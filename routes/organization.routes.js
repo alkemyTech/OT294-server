@@ -10,8 +10,8 @@ const { createOrganizationValidators } = require("../validators/organizations.va
 
 const organizationRouter = express.Router();
 
-newsRouter.get("/:id", organizationExists, getSlidesByOrganization);
-router.post("/public", authAdmin, createOrganizationValidators, updateOrganization);
-router.get("/public/:id", organizationExists, getOrganizationById);
+organizationRouter.get("/:id", organizationExists, getSlidesByOrganization);
+organizationRouter.post("/public", authAdmin, createOrganizationValidators, updateOrganization);
+organizationRouter.get("/public/:id", organizationExists, getOrganizationById);
 
 module.exports = organizationRouter;

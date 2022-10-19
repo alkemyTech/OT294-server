@@ -9,7 +9,7 @@ const testimonialsExists = catchAsync(async (req, next) => {
   const { id } = req.params;
   const testimonial = await Testimonials.findOne({ where: { id } });
   if (!testimonial) {
-    return next(new AppError("Slide no encontrado", 404));
+    return next(new AppError("Testimonio no encontrado", 404));
   }
   req.testimonial = testimonial;
   next();
