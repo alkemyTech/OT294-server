@@ -1,4 +1,5 @@
 const { catchAsync } = require("../utils/catchAsync.util");
+const { AppError } = require("../utils/appError.util")
 const { Category } = require("../models");
 
 const updateCategory = catchAsync(async (req, res) => {
@@ -43,12 +44,42 @@ const getCategoryById = catchAsync(async (req, res) => {
 });
 
 const getCategories = catchAsync(async (req, res) => {
+    const { page } = req.query
     const categories = await Category.findAll();
+    
+    if (!page) {
+        page = 1
+    }
 
-    res.status(200).json({
+    let nextPage = ''
+    let previousPage = ''
+    const lastPage = Math.ceil(categories.length / 10)
+    const lastCategory = 10 * page
+    const firstCategory = lastCategory - 10
+    const categoriesPaginated = categories.slice(firstCategory, lastCategory)
+
+    if (page > lastPage) {
+        return next(new AppError("Página no encontrada"))
+    }
+
+    if (page === 1) {
+        nextPage = `http://localhost:3000/categories?page=${page + 1}`
+    } else if (page > 1 && page < lastPage) {
+        previousPage = `http://localhost:3000/categories?page=${page - 1}`
+        nextPage = `http://localhost:3000/categories?page=${page + 1}`
+    } else if (page === lastPage) {
+        previousPage = `http://localhost:3000/categories?page=${page - 1}`
+    }
+
+
+    res.status(201).json({
         status: true,
         message: "Las categorías se han obtenido",
-        data: categories
+        data: {
+            categoriesPaginated,
+            previousPage,
+            nextPage
+        }
     });
 });
 
