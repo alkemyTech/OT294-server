@@ -1,0 +1,286 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Proyecto ONG - Somos Más",
+    "description": "Esta API se encarga de manejar la informacion de la base de datos del proyecto ONG",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/categories"
+    }
+  ],
+  "tags": [
+    {
+      "name": "categories",
+      "description": "Este endpoint maneja toda la informacion relacionada de las categorias."
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Inserta la informacion de una nueva categoria a la DB",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BodyCategories"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "(OK) La informacion de la categoria se guardo correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoCategoryPost"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Muestra el listado de las categorias por paginacion",
+        "responses": {
+          "200": {
+            "description": "(OK) La informacion se listo correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoCategoryGet"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "patch": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Actualiza la informacion de una categoria por su id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BodyCategories"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador de la categoria",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(OK) La informacion se actualizo correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoCategoryPatch"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "categories"
+        ],
+        "summary": "Elimina una categoria por su id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador de la categoria",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(OK) La informacion se elimino correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoCategoryDelete"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "NotFound": {
+        "description": "(NotFound) no se encontro la informacion"
+      },
+      "BadRequest": {
+        "description": "(BadRequest) los datos enviados son incorrectos o hay datos obligatorios no enviados"
+      },
+      "ServerError": {
+        "description": "Error en el servidor"
+      }
+    },
+    "schemas": {
+      "BodyCategories": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nombre de la categoria"
+          },
+          "description": {
+            "type": "string",
+            "description": "Descripcion de la categoria"
+          },
+          "image": {
+            "type": "string",
+            "description": "Imagen de la categoria"
+          }
+        }
+      },
+      "ExitoCategoryPost": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "La categoria ha sido creada",
+            "description": "mensaje de respuesta de la categoria"
+          },
+          "data": {
+            "type": "object",
+            "default": "category",
+            "description": "Categoria creada"
+          }
+        }
+      },
+      "ExitoCategoryGet": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "Las categorias se han obtenido exitosamente",
+            "description": "mensaje de respuesta del listado"
+          },
+          "data": {
+            "type": "object",
+            "default": "responseObj",
+            "description": "listado de categorias"
+          }
+        }
+      },
+      "ExitoCategoryPatch": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "categoria actualizada exitosamente",
+            "description": "mensaje de respuesta de la categoria actualizada"
+          },
+          "data": {
+            "type": "object",
+            "default": "category",
+            "description": "categoria actualizada"
+          }
+        }
+      },
+      "ExitoCategoryDelete": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "categoria eliminada exitosamente",
+            "description": "mensaje de respuesta de la categoria eliminada"
+          },
+          "data": {
+            "type": "object",
+            "default": "category",
+            "description": "categoria eliminada"
+          }
+        }
+      }
+    }
+  }
+}

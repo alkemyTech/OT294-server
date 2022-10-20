@@ -6,6 +6,11 @@ const logger = require("morgan");
 const cors = require("cors");
 require("dotenv").config();
 
+// swagger
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUI = require("swagger-ui-express");
+const { swaggerSpec } = require("./swagger/swagger");
+
 const usersRouter = require("./routes/users.routes");
 const newsRouter = require("./routes/news.routes");
 const categoriesRouter = require("./routes/categories.routes");
@@ -17,7 +22,6 @@ const slidesRouter = require("./routes/slides.routes");
 const membersRouter = require("./routes/members.routes");
 const contactsRouter = require("./routes/contacts.routes");
 const commentsRouter = require("./routes/comments.routes");
-const postsRouter = require("./routes/posts.routes");
 const app = express();
 app.use(cors());
 
@@ -33,6 +37,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //app.use(authMiddleware);
 
+app.use("/news-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
+
 app.use("/users", usersRouter);
 app.use("/news", newsRouter);
 app.use("/categories", categoriesRouter);
@@ -44,7 +50,6 @@ app.use("/slides", slidesRouter);
 app.use("/members", membersRouter);
 app.use("/contacts", contactsRouter);
 app.use("/comments", commentsRouter);
-app.use("/posts", postsRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

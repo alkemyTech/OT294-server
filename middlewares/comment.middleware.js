@@ -1,5 +1,5 @@
 // Models
-const { Comment } = require("../models/category");
+const { Comment } = require("../models");
 
 // Utils
 const { AppError } = require("../utils/appError.util");

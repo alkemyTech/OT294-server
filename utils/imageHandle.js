@@ -1,0 +1,3 @@
+const {Slide} = require('../models')
+
+

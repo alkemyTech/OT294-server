@@ -2,10 +2,15 @@
 const { catchAsync } = require("../utils/catchAsync.util");
 const { AppError } = require("../utils/appError.util");
 
-const authAdmin = catchAsync(async (req, res, next) => {
-    const { roleId } = req.body;
+//Model 
+const { User } = require("../models")
 
-    if (roleId !== 1) {
+const authAdmin = catchAsync(async (req, res, next) => {
+
+    const { userId } = req
+    const user = await User.findOne({ where: {id: userId}})
+
+    if (user.roleId !== 1) {
         return next(new AppError("No tiene permisos de administrador", 403));
     }
 

@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/", getCategories);
 router.get("/:id", categoryExists, getCategoryById);
 router.post("/", createCategoryValidators, createCategory);
-router.put("/:id", categoryExists, updateCategory);
+router.patch("/:id", categoryExists, updateCategory);
 router.delete("/:id", categoryExists, deleteCategory);
 
 

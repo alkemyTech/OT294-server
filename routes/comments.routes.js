@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { commentExists } = require("../middlewares/comment.middleware");
-const createCommentValidators = require("../validators/comments.validator");
+const { createCommentValidators } = require("../validators/comments.validator");
 // Controllers
 const {
   createComment,
