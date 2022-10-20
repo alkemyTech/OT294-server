@@ -1,5 +1,5 @@
 // Models
-const { News } = require("../models");
+const { News,Comment } = require("../models");
 
 // Utils
 const { catchAsync } = require("../utils/catchAsync.util");
@@ -11,7 +11,7 @@ const createNews = catchAsync(async (req, res) => {
     const news = await News.create({ name, content, image, categoryId });
 
     res.status(201).json({
-        status: "true",
+        status: true,
         message: "Noticia creada con exito",
         data: news,
     });
@@ -24,7 +24,7 @@ const getAllNews = catchAsync(async (req, res) => {
     const totalPages = Math.ceil(news.count / 2);
 
     res.status(200).json({
-        status: "true",
+        status: true,
         message: "Novedades obtenidas con exito",
         data: {
             page: +page,
@@ -36,50 +36,18 @@ const getAllNews = catchAsync(async (req, res) => {
     });
 });
 
-
-const getNewsDeleted = catchAsync(async (req, res) => {
-    const data = await News.findAll();
-    const newsDeleted = await data.filter((element) => {
-        return element.deletedAt !== null;
-    });
-
-    res.status(201).json({
-        status: "true",
-        message: "Listado de noticias",
-        data: newsDeleted,
-    });
-});
-
-const getNewsById = catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const news = await News.findOne({ where: { id, deletedAt: null } });
-
-    if (!news) {
-        return next(new AppError("Noticia no encontrada", 404));
-    }
-
-    res.status(201).json({
-        status: "true",
-        message: "Detalle de noticias",
-        data: news,
-    });
-});
-
 const updateNews = catchAsync(async (req, res) => {
-    const { news } = req.params;
+    const { news } = req;
     const { name, content, image, categoryId, deletedAt } = req.body;
 
     await news.update({ name, content, image, categoryId, deletedAt });
 
-    res.status(201).json({
-        status: "true",
+    res.status(200).json({
+        status: true,
         message: "Noticia actualizada",
         data: news,
     });
 });
-
-
-
 
 const deleteNews = catchAsync(async (req, res) => {
     const { news } = req;
@@ -95,12 +63,28 @@ const deleteNews = catchAsync(async (req, res) => {
 
 
 
+const getCommentsByNews = catchAsync(async (req, res, next) => {
+    const { news } = req;
+  
+    const comments = await Comment.findAll({ where: { news_id: news.id } });
+  
+    if (!comments) {
+      return next(new AppError("No hay comentarios en esta noticia", 404));
+    }
+  
+    res.status(200).json({
+      status: true,
+      message: "Listado de comentarios",
+      data: comments,
+    });
+  });
+
+
 
 module.exports = {
     createNews,
     getAllNews,
-    getNewsDeleted,
-    getNewsById,
     updateNews,
     deleteNews,
+    getCommentsByNews
 };

@@ -19,11 +19,13 @@ module.exports = (sequelize, DataTypes) => {
         address: DataTypes.STRING,
         phone: DataTypes.INTEGER,
         email: DataTypes.STRING,
-        welcomeText: DataTypes.TEXT,
-        aboutUsText: DataTypes.TEXT,
+        welcomeText: DataTypes.STRING,
+        aboutUsText: DataTypes.STRING,
     }, {
         sequelize,
         modelName: "Organization",
+        timestamps: true,
+        paranoid: true
     });
     return Organization;
 };

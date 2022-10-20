@@ -18,7 +18,7 @@ const createOrganizationValidators = [
         .isEmail()
         .withMessage("Formato email no valido"),
     body("welcomeText")
-        .isEmpty()
+        .notEmpty()
         .withMessage("Texto de bienvenida no puede estar vacio"),
     checkResult,
 ];

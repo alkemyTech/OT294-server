@@ -5,12 +5,12 @@ const createCommentValidators = [
     body("user_id")
         .notEmpty()
         .withMessage("User_id no puede ser un campo vacio")
-        .isInt()
+        .isNumeric()
         .withMessage("El campo user_id debe ser numerico"),
     body("news_id")
         .notEmpty()
         .withMessage("News_id no puede ser un campo vacio")
-        .isInt()
+        .isNumeric()
         .withMessage("El campo News_id debe ser numerico"),
     body("body")
         .notEmpty()

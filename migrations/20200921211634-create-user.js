@@ -16,7 +16,18 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        unique: true
+        allowNull: false,
+        unique: {
+          msg: 'El email necesita ser unico'
+        },
+        validate: {
+          isEmail: {
+            msg: 'Email no valido'
+          },
+          notEmpty: {
+            msg: 'Ingrese un email'
+          }
+        }
       },
       password: {
         type: Sequelize.STRING
@@ -36,15 +47,15 @@ module.exports = {
         onUpdate: "CASCADE",
         onDelete: "SET NULL"
       },
-      deletedAt: {
-        type: Sequelize.DATE
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
+        type: Sequelize.DATE
+      },
+      deletedAt: {
         type: Sequelize.DATE
       }
     });
