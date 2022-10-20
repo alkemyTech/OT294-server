@@ -1,0 +1,208 @@
+/**
+*
+*
+*
+  */
+/**
+* @swagger
+* openapi: 3.0.1
+* info:
+*   title: API Proyecto ONG - Somos Más
+*   description: Esta API se encarga de manejar la informacion de la base de datos del proyecto ONG
+*   version: 1.0.0
+* servers:
+*   - url: /testimonials
+* tags:
+*   - name: testimonials
+*     description: Este endpoint maneja toda la informacion relacionada de los testimonios.
+* paths:
+*   /testimonials:
+*     get:
+*       tags:
+*         - testimonials
+*       summary: Entrega toda la información de todos los testimonios
+*       responses:
+*         '200':
+*           description: (OK) Testimonios obtenidos con exito
+*           content:
+*             aplication/json:
+*               schema:
+*                 $ref: '#/components/schemas/allTestimonial'
+*         '400':
+*           $ref: '#/components/responses/BadRequest'
+*         '404':
+*           $ref: '#/components/responses/NotFound'
+*         '500':
+*           $ref: '#/components/responses/ServerError'
+*     post:
+*       tags:
+*         - testimonials
+*       summary: Crea un nuevo registro para un testimonio
+*       requestBody:
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/createUpdateTestimonials'
+*         required: true
+*       responses:
+*         '201':
+*           description: (OK) Testimonios creado con exito
+*           content:
+*             aplication/json:
+*               schema:
+*                 $ref: '#/components/schemas/testimonials'
+*         '400':
+*           $ref: '#/components/responses/BadRequest'
+*         '404':
+*           $ref: '#/components/responses/NotFound'
+*         '500':
+*           $ref: '#/components/responses/ServerError'
+*   /testimonials/{id}:
+*     patch:
+*       tags:
+*         - testimonials
+*       summary: Actualiza un registro para un testimonio
+*       requestBody:
+*         content:
+*           application/json:
+*             schema:
+*               $ref: '#/components/schemas/createUpdateTestimonials'
+*         required: true
+*       parameters:
+*         - name: id
+*           in: path
+*           description: Identificador del usuario
+*           required: true
+*           schema:
+*             type: integer
+*       responses:
+*         '200':
+*           description: (OK) Testimonios actualizado con exito
+*           content:
+*             aplication/json:
+*               schema:
+*                 $ref: '#/components/schemas/testimonials'
+*         '400':
+*           $ref: '#/components/responses/BadRequest'
+*         '404':
+*           $ref: '#/components/responses/NotFound'
+*         '500':
+*           $ref: '#/components/responses/ServerError'
+*     delete:
+*       tags:
+*         - testimonials
+*       summary: Elimina un registro para un testimonio
+*       parameters:
+*         - name: id
+*           in: path
+*           description: Identificador del usuario
+*           required: true
+*           schema:
+*             type: integer
+*       responses:
+*         '200':
+*           description: (OK) Testimonios eliminado con exito
+*           content:
+*             aplication/json:
+*               schema:
+*                 $ref: '#/components/schemas/deleteTestimonials'
+*         '400':
+*           $ref: '#/components/responses/BadRequest'
+*         '404':
+*           $ref: '#/components/responses/NotFound'
+*         '500':
+*           $ref: '#/components/responses/ServerError'
+* components:
+*   responses:
+*     NotFound:
+*       description: (NotFound) no se encontro la informacion
+*     BadRequest:
+*       description: (BadRequest) los datos enviados son incorrectos o hay datos obligatorios no enviados
+*     ServerError:
+*       description: Error en el servidor
+*   schemas:
+*     allTestimonial:
+*       type: object
+*       properties:
+*         status:
+*           type: boolean
+*           default: true
+*           description: Valor que nos indica que la operacion fue Ok
+*         message:
+*           type: string
+*           default: Testimonios obtenidos con exito
+*           description: mensaje de respuesta del testimonio
+*         data:
+*           type: object
+*           properties:
+*             page:
+*               type: integer
+*               default: Número de página actual de la respuesta
+*             content:
+*               type: array
+*               items:
+*                 $ref: '#/components/schemas/createUpdateTestimonials'
+*               default: Información de los testimonios
+*             totalPages:
+*               type: integer
+*               default: Número total de páginas
+*             nextPage:
+*               type: string
+*               default: Enlace para la página siguiente de resultados
+*             previusPage:
+*               type: string
+*               default: Enlace para la página anterior de resultados
+*           description: Objeto con la información de respuesta
+*     testimonials:
+*       type: object
+*       properties:
+*         status:
+*           type: boolean
+*           default: true
+*           description: Valor que nos indica que la operacion fue Ok
+*         message:
+*           type: string
+*           default: Testimonio con exito
+*           description: Mensaje de respuesta
+*         data:
+*           type: object
+*           properties:
+*             name:
+*               type: string
+*               default: Nombre de la persona que brinda el testimonio
+*             image:
+*               type: string
+*               default: url de la imagen de la persona que brinda el testimonio
+*             roleId:
+*               type: integer
+*               default: Número que representa el rol que ocupa la persona que brnda el testimonio
+*             content:
+*               type: string
+*               default: Testimonio brindado
+*     deleteTestimonials:
+*       type: object
+*       properties:
+*         status:
+*           type: boolean
+*           default: true
+*           description: Valor que nos indica que la operacion fue Ok
+*         message:
+*           type: string
+*           default: Testimonio con exito
+*           description: Mensaje de respuesta
+*     createUpdateTestimonials:
+*       type: object
+*       properties:
+*         name:
+*           type: string
+*           default: Nombre de la persona que brinda el testimonio
+*         image:
+*           type: string
+*           default: url de la imagen de la persona que brinda el testimonio
+*         roleId:
+*           type: integer
+*           default: Número que representa el rol que ocupa la persona que brnda el testimonio
+*         content:
+*           type: string
+*           default: Testimonio brindado
+*/
