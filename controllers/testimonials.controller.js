@@ -10,7 +10,7 @@ const createTestimonial = catchAsync(async (req, res, next) => {
   const testimonial = await Testimonials.create({ name, content });
 
   res.status(201).json({
-    status: "true",
+    status: true,
     message: "Testimonio creado con exito",
     data: testimonial,
   });
@@ -41,45 +41,21 @@ const deleteTestimonial = catchAsync(async (req, res, next) => {
 });
 
 const getTestimonials = catchAsync(async (req, res) => {
-  const { page } = req.query;
-  const testimonials = await Testimonials.findAll();
+  let page = req.query.page || 0;
+    const testimonials = await Testimonials.findAndCountAll({ limit: 10, offset: +page * 10 });
+    const totalPages = Math.ceil(testimonials.count / 10);
 
-  if (!page) {
-    page = 1;
-  }
-
-  let nextPage = "";
-  let previousPage = "";
-  const lastPage = Math.ceil(testimonials.length / 10);
-  const lastTestimonials = 10 * page;
-  const firstTestimonials = lastTestimonials - 10;
-  const testimonialsPaginated = testimonials.slice(
-    firstTestimonials,
-    lastTestimonials
-  );
-
-  if (page > lastPage) {
-    return next(new AppError("Página no encontrada"));
-  }
-
-  if (page === 1) {
-    nextPage = `http://localhost:3000/testimonials?page=${page + 1}`;
-  } else if (page > 1 && page < lastPage) {
-    previousPage = `http://localhost:3000/testimonials?page=${page - 1}`;
-    nextPage = `http://localhost:3000/testimonials?page=${page + 1}`;
-  } else if (page === lastPage) {
-    previousPage = `http://localhost:3000/testimonials?page=${page - 1}`;
-  }
-
-  res.status(200).json({
-    status: true,
-    message: "Los testimonios se han obtenido",
-    data: {
-      testimonialsPaginated,
-      previousPage,
-      nextPage,
-    },
-  });
+    res.status(200).json({
+        status: true,
+        message: "Testimonios obtenidos con exito",
+        data: {
+            page: +page,
+            content: testimonials.rows,
+            totalPages,
+            nextPage: `GET /testimonials/?page=${+page < totalPages ? +page + 1 : null}`,
+            previusPage: `GET /testimonials/?page=${+page > 0 ? +page - 1 : null}`
+        }
+    });
 });
 
 module.exports = {

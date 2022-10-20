@@ -1,5 +1,5 @@
 // Models
-const { members } = require("../models");
+const { Members } = require("../models");
 
 // Utils
 const { AppError } = require("../utils/appError.util");
@@ -8,7 +8,7 @@ const { catchAsync } = require("../utils/catchAsync.util");
 const memberExists = catchAsync(async (req, res, next) => {
     const { id } = req.params;
 
-    const member = await members.findOne({ where: { id } });
+    const member = await Members.findOne({ where: { id } });
 
     if (!member) {
         return next(new AppError("Miembro no encontrado", 404));

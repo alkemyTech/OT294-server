@@ -1,0 +1,455 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Proyecto ONG - Somos Más",
+    "description": "Esta API se encarga de manejar la informacion de la base de datos del proyecto ONG",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/users"
+    }
+  ],
+  "tags": [
+    {
+      "name": "users",
+      "description": "Este endpoint maneja toda la informacion relacionada de los usuarios."
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Inserta la informacion de un nuevo usuario a la DB",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BodyUserCreate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "(OK) La informacion del usuario se guardo correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoUserCreate"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Valida las credenciales y devuelve el token de acceso",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BodyLogin"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "(OK) Sesión iniciada con exito",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoLogin"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Muestra el listado de los usuarios",
+        "responses": {
+          "200": {
+            "description": "(OK) La informacion se listo correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoUsersGet"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "patch": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Actualiza la informacion de un usuario por su id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BodyUserUpdate"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador del usuario",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(OK) La informacion se actualizo correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoUserPatch"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Elimina un usuario por su id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador del usuario",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(OK) La informacion se elimino correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoUserDelete"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "NotFound": {
+        "description": "(NotFound) no se encontro la informacion"
+      },
+      "BadRequest": {
+        "description": "(BadRequest) los datos enviados son incorrectos o hay datos obligatorios no enviados"
+      },
+      "ServerError": {
+        "description": "Error en el servidor"
+      }
+    },
+    "schemas": {
+      "BodyUserCreate": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "Nombres del usuario"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Apellidos del usuario"
+          },
+          "email": {
+            "type": "string",
+            "description": "Correo electronico del usuario"
+          },
+          "password": {
+            "type": "string",
+            "description": "Contraseña del usuario"
+          }
+        }
+      },
+      "BodyLogin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Correo electronico del usuario"
+          },
+          "password": {
+            "type": "string",
+            "description": "Contraseña del usuario"
+          }
+        }
+      },
+      "BodyUserUpdate": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "description": "Nombres del usuario"
+          },
+          "lastName": {
+            "type": "string",
+            "description": "Apellidos del usuario"
+          },
+          "image": {
+            "type": "string",
+            "description": "Apellidos del usuario"
+          },
+          "email": {
+            "type": "string",
+            "description": "Correo electronico del usuario"
+          },
+          "password": {
+            "type": "string",
+            "description": "Contraseña del usuario"
+          }
+        }
+      },
+      "ExitoUserCreate": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "Valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "Se ha registrado el usuario exitosamente",
+            "description": "mensaje de respuesta del usuario"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "usuario": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "default": "Nombres del usuario"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "default": "Apellidos del usuario"
+                  },
+                  "email": {
+                    "type": "string",
+                    "default": "Email del usuario"
+                  },
+                  "password": {
+                    "type": "string",
+                    "default": "Contraseña del usuario"
+                  }
+                }
+              },
+              "token": {
+                "type": "string",
+                "default": "Token de acceso"
+              }
+            },
+            "description": "Usuario creado"
+          }
+        }
+      },
+      "ExitoLogin": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "Valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "Sesión iniciada correctamente",
+            "description": "Mensaje de respuesta"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "token": {
+                "type": "string",
+                "default": "Token de acceso"
+              }
+            }
+          }
+        }
+      },
+      "ExitoUsersGet": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "Usuarios obtenidos exitosamente",
+            "description": "mensaje de respuesta del listado"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "users": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "default": "Nombres del usuario"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "default": "Apellidos del usuario"
+                  },
+                  "email": {
+                    "type": "string",
+                    "default": "Email del usuario"
+                  },
+                  "password": {
+                    "type": "string",
+                    "default": "Contraseña del usuario"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ExitoUserPatch": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "Valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "Usuario actualizado exitosamente",
+            "description": "mensaje de respuesta del usuario actualizado"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "firstName": {
+                "type": "string",
+                "default": "Nombres del usuario"
+              },
+              "lastName": {
+                "type": "string",
+                "default": "Apellidos del usuario"
+              },
+              "image": {
+                "type": "string",
+                "default": "Imagen del usuario"
+              },
+              "email": {
+                "type": "string",
+                "default": "Email del usuario"
+              },
+              "password": {
+                "type": "string",
+                "default": "Contraseña del usuario"
+              }
+            }
+          }
+        }
+      },
+      "ExitoUserDelete": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "Valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "Usuario eliminado exitosamente",
+            "description": "mensaje de respuesta del usuario eliminado"
+          }
+        }
+      }
+    }
+  }
+}

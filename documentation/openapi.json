@@ -1,0 +1,298 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API Proyecto ONG - Somos Más",
+    "description": "Esta API se encarga de manejar la informacion de la base de datos del proyecto ONG",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/members"
+    }
+  ],
+  "tags": [
+    {
+      "name": "members",
+      "description": "Este endpoint maneja toda la informacion relacionada de los miembros."
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Inserta la informacion de un nuevo miembro a la DB",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BodyMembers"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "(OK) La informacion del miembro se guardo correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoMembersPost"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Muestra el listado de miembros por paginacion",
+        "responses": {
+          "200": {
+            "description": "(OK) La informacion se listo correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoMembersGet"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "patch": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Actualiza la informacion de un miembro por su id",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BodyMembers"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador del miembro",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(OK) La informacion se actualizo correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoMemberPatch"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Elimina un miembro por su id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador del miembro",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "(OK) La informacion se elimino correctamente",
+            "content": {
+              "aplication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExitoMemberDelete"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "NotFound": {
+        "description": "(NotFound) no se encontro la informacion"
+      },
+      "BadRequest": {
+        "description": "(BadRequest) los datos enviados son incorrectos o hay datos obligatorios no enviados"
+      },
+      "ServerError": {
+        "description": "Error en el servidor"
+      }
+    },
+    "schemas": {
+      "BodyMembers": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nombre del nuevo miembro"
+          },
+          "facebookUrl": {
+            "type": "string",
+            "description": "Url de facebook"
+          },
+          "instagramUrl": {
+            "type": "string",
+            "description": "Url de Instagram"
+          },
+          "linkedinUrl": {
+            "type": "string",
+            "description": "Url de Linkedin"
+          },
+          "image": {
+            "type": "string",
+            "description": "Imagen del nuevo miembro"
+          },
+          "description": {
+            "type": "string",
+            "description": "Descripcion del miembro"
+          }
+        }
+      },
+      "ExitoMembersPost": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "miembro registrado exitosamente",
+            "description": "mensaje de respuesta del miembro creado"
+          },
+          "data": {
+            "type": "object",
+            "default": "member",
+            "description": "miembro creado en la BD"
+          }
+        }
+      },
+      "ExitoMembersGet": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "miembros obtenidos exitosamente",
+            "description": "mensaje de respuesta del listado"
+          },
+          "data": {
+            "type": "object",
+            "default": "responseObj",
+            "description": "miembros listados"
+          }
+        }
+      },
+      "ExitoMemberPatch": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "miembro actualizado exitosamente",
+            "description": "mensaje de respuesta del miembro actualizado"
+          },
+          "data": {
+            "type": "object",
+            "default": "member",
+            "description": "miembro actualizado"
+          }
+        }
+      },
+      "ExitoMemberDelete": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "boolean",
+            "default": true,
+            "description": "valor que nos indica que la operacion fue Ok"
+          },
+          "message": {
+            "type": "string",
+            "default": "miembro eliminado exitosamente",
+            "description": "mensaje de respuesta del miembro eliminado"
+          },
+          "data": {
+            "type": "object",
+            "default": "member",
+            "description": "miembro eliminado"
+          }
+        }
+      }
+    }
+  }
+}

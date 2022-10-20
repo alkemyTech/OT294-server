@@ -8,6 +8,7 @@ const { getAllMembers, createMember, deleteMember, updateMember } = require("../
 const { memberExists } = require("../middlewares/members.middleware");
 const { authAdmin } = require("../middlewares/authAdmin.middleware");
 const { createMemberValidators } = require("../validators/members.validator");
+const { auth } = require("../middlewares/auth.middleware");
 
 /* GET members listing. */
 router.get("/", getAllMembers);
@@ -16,9 +17,9 @@ router.get("/", getAllMembers);
 router.post("/", createMemberValidators, createMember);
 
 /* UPDATE delete member. */
-router.put("/:id", memberExists, updateMember);
+router.patch("/:id", memberExists, updateMember);
 
 /* DELETE member deleted. */
-router.delete("/:id", authAdmin, memberExists, deleteMember);
+router.delete("/:id", auth, authAdmin, memberExists, deleteMember);
 
 module.exports = router;

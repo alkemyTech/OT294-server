@@ -6,8 +6,8 @@ const logger = require("morgan");
 const cors = require("cors");
 const swaggerUI = require("swagger-ui-express");
 const swaggerJsDoc = require("swagger-jsdoc");
+const { swaggerSpec } = require("./swagger/swagger");
 require("dotenv").config();
-
 const swaggerOptions = {
     definition: {
         openapi: "3.0.0",
@@ -22,6 +22,8 @@ const swaggerOptions = {
         ]
     }, apis: ["./routes/*.js"]
 };
+
+
 
 const usersRouter = require("./routes/users.routes");
 const newsRouter = require("./routes/news.routes");
@@ -52,6 +54,8 @@ app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerOption
 
 //app.use(authMiddleware);
 
+app.use("/news-docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerSpec)));
+
 app.use("/users", usersRouter);
 app.use("/news", newsRouter);
 app.use("/categories", categoriesRouter);
@@ -63,7 +67,6 @@ app.use("/slides", slidesRouter);
 app.use("/members", membersRouter);
 app.use("/contacts", contactsRouter);
 app.use("/comments", commentsRouter);
-app.use("/posts", postsRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
