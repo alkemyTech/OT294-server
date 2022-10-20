@@ -1,0 +1,129 @@
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     News:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: Nombre de la novedad
+ *         content:
+ *           type: string
+ *           description: El contenido de la novedad
+ *         image:
+ *           type: string
+ *           description: La url de la imagen de la novedad
+ *         categoryId:
+ *           type: integer
+ *           description: El id del tipo de categoria a la que pertenece la novedad
+ *       required:
+ *         - name
+ *         - content
+ *         - image
+ *         - email
+ *       example:
+ *         name: Novedad 1,
+ *         content: Contenido de la novedad,
+ *         image: https://.....,
+ *         categoryId: 1
+ */
+
+
+/**
+ * @swagger
+ * /news:
+ *   get:
+ *     summary: obtener todas las novedades
+ *     tags: [News]     
+ *     responses:
+ *       200:
+ *         description: Novedades obtenidas con exito!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/News'
+ */
+
+
+/**
+ * @swagger
+ * /news:
+ *   post:
+ *     summary: crear una novedad
+ *     tags: [News]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             $ref: '#/components/schemas/News'
+ *     responses:
+ *       201:
+ *         description: Novedad creada con exito!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               $ref: '#components/schemas/News'
+ */
+
+/**
+ * @swagger
+ * /news:
+ *   put:
+ *     summary: actualizar una novedad
+ *     tags: [News]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: el id de la novedad para actualizar
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             $ref: '#/components/schemas/News'     
+ *     responses:
+ *       200:
+ *         description: Novedad encontrada con exito!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               $ref: '#components/schemas/News'
+ *       404:
+ *         description: Novedad no encontrada
+ */
+
+/**
+ * @swagger
+ * /news:
+ *   delete:
+ *     summary: elimina una novedad
+ *     tags: [News]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: el id de la novedad a eliminar
+ *     responses:
+ *       200:
+ *         description: Novedad eliminada con exito!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               $ref: '#/components/schemas/News'
+ *       404:
+ *         description: Novedad no encontrada
+ */
