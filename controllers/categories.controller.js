@@ -50,7 +50,7 @@ const getCategories = catchAsync(async (req, res) => {
     const totalPages = Math.ceil(categories.count / 10);
 
     res.status(200).json({
-        status: "true",
+        status: true,
         message: "Categorias obtenidas con exito",
         data: {
             page: +page,

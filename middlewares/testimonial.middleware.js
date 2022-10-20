@@ -5,7 +5,7 @@ const { Testimonials } = require("../models");
 const { AppError } = require("../utils/appError.util");
 const { catchAsync } = require("../utils/catchAsync.util");
 
-const testimonialsExists = catchAsync(async (req, next) => {
+const testimonialsExists = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const testimonial = await Testimonials.findOne({ where: { id } });
   if (!testimonial) {

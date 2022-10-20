@@ -36,37 +36,8 @@ const getAllNews = catchAsync(async (req, res) => {
     });
 });
 
-
-const getNewsDeleted = catchAsync(async (req, res) => {
-    const data = await News.findAll();
-    const newsDeleted = await data.filter((element) => {
-        return element.deletedAt !== null;
-    });
-
-    res.status(200).json({
-        status: true,
-        message: "Listado de noticias",
-        data: newsDeleted,
-    });
-});
-
-const getNewsById = catchAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const news = await News.findOne({ where: { id, deletedAt: null } });
-
-    if (!news) {
-        return next(new AppError("Noticia no encontrada", 404));
-    }
-
-    res.status(200).json({
-        status: true,
-        message: "Detalle de noticias",
-        data: news,
-    });
-});
-
 const updateNews = catchAsync(async (req, res) => {
-    const { news } = req.params;
+    const { news } = req;
     const { name, content, image, categoryId, deletedAt } = req.body;
 
     await news.update({ name, content, image, categoryId, deletedAt });
@@ -77,9 +48,6 @@ const updateNews = catchAsync(async (req, res) => {
         data: news,
     });
 });
-
-
-
 
 const deleteNews = catchAsync(async (req, res) => {
     const { news } = req;
@@ -116,8 +84,6 @@ const getCommentsByNews = catchAsync(async (req, res, next) => {
 module.exports = {
     createNews,
     getAllNews,
-    getNewsDeleted,
-    getNewsById,
     updateNews,
     deleteNews,
     getCommentsByNews

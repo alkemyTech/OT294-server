@@ -17,11 +17,11 @@ module.exports = (sequelize, DataTypes) => {
       text: DataTypes.STRING,
       order: DataTypes.INTEGER,
       organizationId: DataTypes.INTEGER,
-      deletedAt: DataTypes.DATE,
     },
     {
       sequelize,
       modelName: "Slide",
+      timestamps: true.valueOf,
       paranoid: true,
     }
   );

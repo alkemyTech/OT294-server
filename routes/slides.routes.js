@@ -21,7 +21,7 @@ const { createSlideValidators } = require("../validators/slide.validator");
 slidesRouter.post(
   "/",
   authAdmin,
-  /* upload.single("imageUrl"), */
+/*   upload.single("imageUrl"), */
   createSlideValidators,
   createSlide
 );
@@ -32,7 +32,7 @@ slidesRouter.get("/", authAdmin, getAllSlides);
 
 slidesRouter.patch(
   "/:id",
-  /* upload.single("imageUrl"), */
+/*   upload.single("imageUrl"), */
   authAdmin,
   slideExists,
   updateSlide

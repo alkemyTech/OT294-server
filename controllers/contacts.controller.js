@@ -25,7 +25,7 @@ const listContacts = catchAsync(async (req, res) => {
 });
 
 const backOficeContacts = catchAsync(async (req, res) => {
-  const contacts = await Contacts.find({ attributes: ["id", "name", "email", "phone", "message"] });
+  const contacts = await Contacts.findAll({ attributes: ["id", "name", "email", "phone", "message"] });
 
   res.status(200).json({
     status: true,

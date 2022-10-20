@@ -20,7 +20,7 @@ module.exports = {
       message: {
         type: Sequelize.STRING
       },
-      deleteAt: {
+      deletedAt: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -30,10 +30,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      paranoid: {
-          type: Sequelize.BOOLEAN,
-        },
+      }
     });
   },
   async down(queryInterface, Sequelize) {

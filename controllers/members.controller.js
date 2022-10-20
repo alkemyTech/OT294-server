@@ -40,8 +40,7 @@ const updateMember = catchAsync(async (req, res) => {
     const result = await Members.update(body,{where:{id}});
     res.status(200).json({
         status: true, 
-        message: "Miembro actualizado exitosamente", 
-        data:result
+        message: "Miembro actualizado exitosamente"
     });
 });
 

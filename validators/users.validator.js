@@ -11,7 +11,9 @@ const createUserValidators = [
         .withMessage("Apellido no puede estar vacio")
         .isString()
         .withMessage("Apellido debe ser texto"),
-    body("email").isEmail().withMessage("Formato email no valido"),
+    body("email")
+        .isEmail()
+        .withMessage("Formato email no valido"),
     body("password")
         .isLength({ min: 8 })
         .withMessage("Longitud minima de contraseña 8 caracteres")

@@ -22,15 +22,15 @@ const getAllUsers = catchAsync(async (req, res) => {
     });
 });
 
-const createUser = catchAsync(async (req, res) => {
+const createUser = catchAsync(async (req, res, next) => {
     const { firstName, lastName, email, password, image, roleId, status } = req.body;
 
     // Hash password
     const salt = await bcrypt.genSalt(12);
     const hashPassword = await bcrypt.hash(password, salt);
 
-    const SECRET_KEY = process.env.JWT_SECRET;
-    console.log(req.body)
+    /* const SECRET_KEY = process.env.JWT_SECRET; */
+
     const newUser = await User.create({
         firstName,
         lastName,
@@ -41,7 +41,7 @@ const createUser = catchAsync(async (req, res) => {
         status
     });
 
-    const token = jwt.sign(newUser.id, SECRET_KEY);
+    /* const token = jwt.sign(newUser.id, SECRET_KEY); */
 
     // Remove password from response
     newUser.password = undefined;
@@ -51,10 +51,10 @@ const createUser = catchAsync(async (req, res) => {
 
     res.status(201).json({
         status: true,
-        message: "Se ha registardo el usuario exitosamente",
+        message: "Se ha registrado el usuario exitosamente",
         data: {
-            ususario: newUser,
-            token
+            usuario: newUser,
+            /* token */
         }
     });
 });
@@ -100,9 +100,9 @@ const updateUser = catchAsync(async (req, res) => {
     const hashPassword = await bcrypt.hash(password, salt);
 
     await user.update({
-        firstName, 
-        lastName, 
-        email, 
+        firstName,
+        lastName,
+        email,
         image,
         password: hashPassword
     });

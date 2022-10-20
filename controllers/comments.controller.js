@@ -50,6 +50,7 @@ const updateComment = catchAsync(async (req, res) => {
 
 const createComment = catchAsync(async (req, res) => {
   const { user_id, news_id, body } = req.body;
+
   const comment = await Comment.create({
     news_id,
     user_id,
