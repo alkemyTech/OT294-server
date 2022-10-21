@@ -20,7 +20,7 @@ const deleteComment = catchAsync(async (req, res, next) => {
 
   await comment.destroy();
   
-  res.status(200).json({
+  res.status(204).json({
     status: true,
     message: "Comentario eliminado",
   });

@@ -9,7 +9,6 @@ module.exports = {
       linkedinUrl: "https://linkedin.com",
       image: "https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png",
       description: "description test",
-      deletedAt: new Date,
       createdAt: new Date,
       updatedAt: new Date
     }], {})

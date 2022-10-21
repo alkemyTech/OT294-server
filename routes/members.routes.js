@@ -20,6 +20,6 @@ router.post("/", createMemberValidators, createMember);
 router.patch("/:id", memberExists, updateMember);
 
 /* DELETE member deleted. */
-router.delete("/:id", auth, authAdmin, memberExists, deleteMember);
+router.delete("/:id", memberExists, auth, authAdmin, deleteMember);
 
 module.exports = router;

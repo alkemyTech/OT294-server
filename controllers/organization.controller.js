@@ -60,7 +60,7 @@ const updateOrganization = catchAsync(async (req, res) => {
     instagram
   });
 
-  res.status(201).json({
+  res.status(200).json({
     status: true,
     message: "La informacion de la organizacion ha sido actualizada",
     data: organizationUpdated,

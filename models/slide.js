@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Slide.belongsTo(models.Organization, { as: "Organization" });
+      /* Slide.belongsTo(models.Organization, { as: "Organization" }); */
     }
   }
   Slide.init(
@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Slide",
-      timestamps: true.valueOf,
+      timestamps: true,
       paranoid: true,
     }
   );

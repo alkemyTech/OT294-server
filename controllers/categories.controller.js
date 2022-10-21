@@ -37,7 +37,7 @@ const createCategory = catchAsync(async (req, res) => {
 
 const getCategoryById = catchAsync(async (req, res) => {
     const { category } = req;
-    res.status(201).json({
+    res.status(200).json({
         status: true,
         message: "La categoría se ha obtenido",
         data: category

@@ -19,11 +19,11 @@ module.exports = (sequelize, DataTypes) => {
         instagramUrl: DataTypes.STRING,
         linkedinUrl: DataTypes.STRING,
         image: DataTypes.STRING,
-        description: DataTypes.STRING,
-        deletedAt: DataTypes.STRING
+        description: DataTypes.STRING
     }, {
         sequelize,
         modelName: "Members",
+        timestamps: true,
         paranoid: true,
     });
     return Members;

@@ -17,27 +17,30 @@ const {
 const { authAdmin } = require("../middlewares/authAdmin.middleware");
 const { slideExists } = require("../middlewares/slide.middleware");
 const { createSlideValidators } = require("../validators/slide.validator");
+const { auth } = require("../middlewares/auth.middleware");
 
 slidesRouter.post(
   "/",
+  auth,
   authAdmin,
-/*   upload.single("imageUrl"), */
+  upload.single("imageUrl"),
   createSlideValidators,
   createSlide
 );
 
-slidesRouter.get("/:id", authAdmin, slideExists, getSlideById);
+slidesRouter.get("/:id", slideExists, auth, authAdmin, getSlideById);
 
-slidesRouter.get("/", authAdmin, getAllSlides);
+slidesRouter.get("/", auth, authAdmin, getAllSlides);
 
 slidesRouter.patch(
   "/:id",
-/*   upload.single("imageUrl"), */
+  auth,
   authAdmin,
   slideExists,
+  upload.single("imageUrl"),
   updateSlide
 );
 
-slidesRouter.delete("/:id", authAdmin, slideExists, deleteSlide);
+slidesRouter.delete("/:id", auth, authAdmin, slideExists, deleteSlide);
 
 module.exports = slidesRouter;

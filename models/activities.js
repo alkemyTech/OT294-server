@@ -17,11 +17,12 @@ module.exports = (sequelize, DataTypes) => {
             name: DataTypes.STRING,
             image: DataTypes.STRING,
             content: DataTypes.STRING,
-            deletedAt: DataTypes.DATE,
         },
         {
             sequelize,
             modelName: "Activities",
+            timestamps: true,
+            paranoid: true
         }
     );
     return Activities;
