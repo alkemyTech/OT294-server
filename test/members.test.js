@@ -18,8 +18,6 @@ chai.use(chaiHttp);
 // Token para los tests.
 const adminToken = process.env.TEST_ADMIN_TOKEN;
 const standarUserToken = process.env.TEST_STANDAR_USER_TOKEN;
-
-
 describe("Members API", () => {
   //Test the GET route
   describe("GET /members", () => {
@@ -41,20 +39,20 @@ describe("Members API", () => {
       });
     });
   });
-  describe("GET /members", () => {
-    it("Should return and errror for not auth, without using token", (done) => {
-      chai
-        .request(app)
-        .get("/members?page=1")
-        .end((err, res) => {
-          expect(res).to.have.status(403);
-          expect(res.body)
-            .to.have.property("error")
-            .equal("No se ha proporcionado el token para acceder al recurso");
-          done();
-        });
-    });
-  });
+  // describe("GET /members", () => {
+  //   it("Should return and errror for not auth, without using token", (done) => {
+  //     chai
+  //       .request(app)
+  //       .get("/members?page=1")
+  //       .end((err, res) => {
+  //         expect(res).to.have.status(403);
+  //         expect(res.body)
+  //           .to.have.property("error")
+  //           .equal("No se ha proporcionado el token para acceder al recurso");
+  //         done();
+  //       });
+  //   });
+  // });
 
   // Test the POST route
   describe("#Create members, POST /members", () => {
@@ -130,16 +128,16 @@ describe("Members API", () => {
   });
 
   //   //Test the DELETE route
-  // describe("DELETE /members/:id", () => {
-  //   it("it should DELETE a members given the id", (done) => {
-  //     chai.request(app)
-  //       .delete("/members/44")
-  //       .end((error, res) => {
-  //        expect(res.body).to.be.a("object");
-  //        expect(res.body).to.have.property("message").equal("Miembro eliminado");
-  //        expect(res).to.have.status(200);
-  //         done();
-  //       });
-  //   });
-  // });
+  describe("DELETE /members/:id", () => {
+    it("it should DELETE a members given the id", (done) => {
+      chai.request(app)
+        .delete("/members/48")
+        .end((error, res) => {
+         expect(res.body).to.be.a("object");
+         expect(res.body).to.have.property("message").equal("Miembro eliminado");
+         expect(res).to.have.status(200);
+          done();
+        });
+    });
+  });
 });
