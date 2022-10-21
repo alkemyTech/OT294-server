@@ -1,11 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-unused-expressions */
-/* eslint-disable no-undef */
-/**
- * Testing para los endponits de contactos
- * GET /contacts
- * POST /contacts
- */
 require("dotenv").config();
 const chai = require("chai");
 const { expect } = require("chai");
@@ -17,7 +9,7 @@ chai.should();
 chai.use(chaiHttp);
 // Token para los tests.
 const adminToken = process.env.TEST_ADMIN_TOKEN;
-const standarUserToken = process.env.TEST_STANDAR_USER_TOKEN;
+
 describe("Members API", () => {
   //Test the GET route
   describe("GET /members", () => {
@@ -39,20 +31,20 @@ describe("Members API", () => {
       });
     });
   });
-  // describe("GET /members", () => {
-  //   it("Should return and errror for not auth, without using token", (done) => {
-  //     chai
-  //       .request(app)
-  //       .get("/members?page=1")
-  //       .end((err, res) => {
-  //         expect(res).to.have.status(403);
-  //         expect(res.body)
-  //           .to.have.property("error")
-  //           .equal("No se ha proporcionado el token para acceder al recurso");
-  //         done();
-  //       });
-  //   });
-  // });
+  describe("GET /members", () => {
+    it("Should return and errror for not auth, without using token", (done) => {
+      chai
+        .request(app)
+        .get("/members?page=1")
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          expect(res.body)
+            .to.have.property("error")
+            .equal("No se ha proporcionado el token para acceder al recurso");
+          done();
+        });
+    });
+  });
 
   // Test the POST route
   describe("#Create members, POST /members", () => {
