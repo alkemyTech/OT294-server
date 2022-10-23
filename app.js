@@ -4,12 +4,26 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-require("dotenv").config();
-
-// swagger
-const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
 const { swaggerSpec } = require("./swagger/swagger");
+require("dotenv").config();
+const swaggerOptions = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Somos Más API",
+            versoin: "1.0.0"
+        },
+        servers: [
+            {
+                url: "http://localhost:3000"
+            }
+        ]
+    }, apis: ["./routes/*.js"]
+};
+
+
 
 const usersRouter = require("./routes/users.routes");
 const newsRouter = require("./routes/news.routes");
@@ -22,6 +36,7 @@ const slidesRouter = require("./routes/slides.routes");
 const membersRouter = require("./routes/members.routes");
 const contactsRouter = require("./routes/contacts.routes");
 const commentsRouter = require("./routes/comments.routes");
+
 const app = express();
 app.use(cors());
 
@@ -34,6 +49,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(swaggerJsDoc(swaggerOptions)));
 
 //app.use(authMiddleware);
 

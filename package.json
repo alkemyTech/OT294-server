@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/_mocha || exit 0",
+    "test": "node ./node_modules/mocha/bin/_mocha || exit 0",
     "start": "node ./bin/www",
     "lint:fix": "eslint --fix"
   },
@@ -35,9 +35,9 @@
     "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {
-    "chai": "^4.3.6",
+    "chai": "*",
     "eslint": "^8.24.0",
-    "mocha": "^10.1.0",
+    "mocha": "*",
     "sequelize-cli": "^6.5.1"
   }
 }

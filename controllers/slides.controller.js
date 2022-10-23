@@ -29,47 +29,29 @@ const createSlide = catchAsync(async (req, res) => {
   });
 });
 
-const updateSlide = catchAsync(async (req, res) => {
+const updateSlide = catchAsync(async (req, res, next) => {
   const { slide, file } = req;
   const { text, order, organizationId } = req.body;
+
+  if (order <= 0) {
+    return next(new AppError("Digite un orden válido", 400));
+  }
 
   if (file) {
     const url = await image.uploadImage(order, file);
     await slide.update({
       imageUrl: url,
       text,
-      order,
+      order: Number(order),
       organizationId,
     });
   } else {
     await slide.update({
       text,
-      order,
+      order: Number(order),
       organizationId,
     });
   }
-
-  /* let newOrder = 0;
-  const slides = await Slide.findAll();
-
-  const entryOrder = slides.some((slide) => slide.order === order);
-  if (entryOrder) {
-    return next(new AppError("Digite un orden diferente", 404));
-  }
-
-  if ((slides.length === 0 && order === 0) || order === undefined) {
-    newOrder = 1;
-  } else {
-    if (order === 0 || order === undefined) {
-      let maximumOrder = Math.max.apply(
-        Math,
-        slides.map(function (slide) {
-          return slide.order;
-        })
-      );
-      newOrder = maximumOrder + 1;
-    }
-  } */
 
   res.status(200).json({
     status: true,
@@ -89,14 +71,20 @@ const getSlideById = catchAsync(async (req, res) => {
 });
 
 const getAllSlides = catchAsync(async (req, res) => {
-  const slides = await Slide.findAll({
-    attributes: ["imageUrl", "order"],
-  });
+  let page = req.query.page || 0;
+  const slides = await Slide.findAndCountAll({ limit: 10, offset: +page * 10 });
+  const totalPages = Math.ceil(slides.count / 10);
 
   res.status(200).json({
     status: true,
-    message: "Listado de slides",
-    data: slides,
+    message: "Testimonios obtenidos con exito",
+    data: {
+      page: +page,
+      content: slides.rows,
+      totalPages,
+      nextPage: `GET /slides/?page=${+page < totalPages ? +page + 1 : null}`,
+      previusPage: `GET /slides/?page=${+page > 0 ? +page - 1 : null}`
+    }
   });
 });
 

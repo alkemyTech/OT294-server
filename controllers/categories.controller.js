@@ -56,8 +56,8 @@ const getCategories = catchAsync(async (req, res) => {
             page: +page,
             content: categories.rows,
             totalPages,
-            nextPage: `GET /comments/?page=${+page < totalPages ? +page + 1 : null}`,
-            previusPage: `GET /comments/?page=${+page > 0 ? +page - 1 : null}`
+            nextPage: `GET /categories/?page=${+page < totalPages ? +page + 1 : null}`,
+            previusPage: `GET /categories/?page=${+page > 0 ? +page - 1 : null}`
         }
     });
 });
