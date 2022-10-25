@@ -1,5 +1,5 @@
 // Models
-const { Comment } = require("../models");
+const { Comment, User } = require("../models");
 
 // Utils
 const { catchAsync } = require("../utils/catchAsync.util");
@@ -12,32 +12,36 @@ const getAllComments = catchAsync(async (req, res) => {
 
 const deleteComment = catchAsync(async (req, res, next) => {
 
-  const { comment, sessionUser } = req;
+  const { comment, userId } = req;
 
-  /* if (sessionUser.id !== comment.userId || sessionUser.roleId !== 1) {
+  const sessionUser = await User.findOne({where: {id: userId}})
+
+  if (sessionUser.id !== comment.userId && sessionUser.roleId !== 1) {
     return next(new AppError("No tienes permisos para eliminar este comentario", 404));
-  } */
+  }
 
   await comment.destroy();
   
-  res.status(200).json({
+  res.status(204).json({
     status: true,
     message: "Comentario eliminado",
   });
 });
 
-const updateComment = catchAsync(async (req, res) => {
-  const { comment, sessionUser } = req;
+const updateComment = catchAsync(async (req, res, next) => {
+  const { comment, userId } = req;
   const { body } = req.body;
 
-  /* if (sessionUser.id !== comment.userId || sessionUser.roleId !== 0) {
+  const sessionUser = await User.findOne({where: {id: userId}})
+
+  if (sessionUser.id !== comment.userId && sessionUser.roleId !== 1) {
     return next(
       new AppError(
         "Usted no tiene permisos para actualizar este comentario",
         404
       )
     );
-  } */
+  }
 
   await comment.update({ body });
 

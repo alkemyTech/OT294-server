@@ -40,19 +40,19 @@ const updateMember = catchAsync(async (req, res) => {
     const result = await Members.update(body,{where:{id}});
     res.status(200).json({
         status: true, 
-        message: "Miembro actualizado exitosamente"
+        message: "Miembro actualizado exitosamente",
+        data: result
     });
 });
 
 const deleteMember = catchAsync(async (req, res) => {
     const { member } = req;
 
-    await Members.destroy({ where: { id: member.id } });
-    const memberDeleted = await Members.findOne({ where: { id: member.id }, paranoid: false });
-    res.status(200).json({
-        status: "true",
-        message: "Miembro eliminado",
-        data: memberDeleted
+    await member.destroy();
+
+    res.status(204).json({
+        status: true,
+        message: "Miembro eliminado"
     });
 });
 

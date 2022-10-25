@@ -34,7 +34,7 @@ const deleteTestimonial = catchAsync(async (req, res, next) => {
 
   await testimonial.destroy();
 
-  res.status(200).json({
+  res.status(204).json({
     status: true,
     message: "Testimonio eliminado con exito",
   });

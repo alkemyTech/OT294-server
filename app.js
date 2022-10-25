@@ -36,7 +36,6 @@ const slidesRouter = require("./routes/slides.routes");
 const membersRouter = require("./routes/members.routes");
 const contactsRouter = require("./routes/contacts.routes");
 const commentsRouter = require("./routes/comments.routes");
-const postsRouter = require("./routes/posts.routes");
 
 const app = express();
 app.use(cors());

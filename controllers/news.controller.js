@@ -54,8 +54,8 @@ const deleteNews = catchAsync(async (req, res) => {
     const date = new Date();
     await news.update({ deletedAt: date });
 
-    res.status(201).json({
-        status: "true",
+    res.status(204).json({
+        status: true,
         message: "Noticia eliminada",
         data: news
     });
