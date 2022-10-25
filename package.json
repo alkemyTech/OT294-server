@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "node ./node_modules/mocha/bin/_mocha || exit 0",
+    "test": "node ./node_modules/mocha/bin/_mocha || exit 0",
     "start": "node ./bin/www",
     "lint:fix": "eslint --fix"
   },
